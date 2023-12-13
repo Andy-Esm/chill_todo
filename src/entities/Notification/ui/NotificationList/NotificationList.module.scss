@@ -1,0 +1,69 @@
+.list {
+  --notification-padding: 8px;
+  --scrollbar-size: 6px;
+
+  width: 256px;
+  height: 320px;
+  padding: 12px 0;
+
+  background-color: #fff;
+  border-radius: var(--radius-main);
+  box-shadow: 0 4px 12px 1px rgb(34 139 207 / 25%);
+}
+
+.notification {
+  cursor: pointer;
+
+  position: relative;
+
+  display: flex;
+
+  max-width: inherit;
+  margin-top: 12px;
+  padding: var(--notification-padding);
+
+  text-wrap: wrap;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 8px;
+}
+
+.scroll {
+  &::-webkit-scrollbar {
+    width: var(--scrollbar-size);
+    height: var(--scrollbar-size);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: blue;    /* цвет бегунка */
+    border: 3px solid orange;  /* отступ вокруг бегунка */
+    border-radius: 20px;       /* округлось бегунка */
+  }
+}
+
+.hidden {
+  position: absolute;
+
+  display: flex;
+
+  padding: var(--notification-padding);
+  padding-right: calc(var(--notification-padding) + var(--scrollbar-size));
+
+  color: rgb(255 255 255 / 0%);
+  text-wrap: wrap;
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

@@ -1,0 +1,39 @@
+.tab {
+  cursor: pointer;
+
+  display: flex;
+
+  font-family: var(--ff-heading);
+  font-size: 18px;
+  line-height: 120%;
+  color: hsl(var(--accent-text-hs) var(--lt-400));
+
+  &-active {
+    color: var(--clr-nav-main);
+  }
+}
+
+.tabs {
+  &-wrapper {
+    position: relative;
+
+    display: flex;
+    gap: 16px;
+    align-items: center;
+
+    height: 50px;
+  }
+
+  &-indicator {
+    content: '';
+
+    position: absolute;
+    bottom: -2px;
+
+    height: 2px;
+
+    background: var(--clr-nav-main);
+
+    transition: all 0.3s ease-in-out;
+  }
+}

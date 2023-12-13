@@ -1,0 +1,6 @@
+.tasks-wrapper{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 304px) ;
+  gap: 22px;
+  padding-block-start: var(--gap-xxxl);
+}

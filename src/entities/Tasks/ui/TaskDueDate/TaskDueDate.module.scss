@@ -1,0 +1,27 @@
+.task-due-date {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+
+  width: 100%;
+  padding: 16px 27px 16px 24px;
+
+  border: 1px solid hsl(var(--navigation-hs) var(--lt-400));
+  border-radius: 10px;
+}
+
+.task-due-text {
+  flex: 1;
+  font-size: var(--fs-sm);
+  color: hsl(var(--accent-text-hs) var(--lt-200));;
+
+  & span {
+    display: block;
+  }
+}
+
+.task-due-main-text{
+  font-size: var(--fs-main);
+  color: hsl(var(--accent-text-hs) var(--lt-500));;
+}
+

@@ -1,0 +1,91 @@
+@font-face {
+  font-family: chillTodo;
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+  src:  url('fonts/chillTodo.eot?fkymrx');
+  src:  url('fonts/chillTodo.eot?fkymrx#iefix') format('embedded-opentype'),
+    url('fonts/chillTodo.ttf?fkymrx') format('truetype'),
+    url('fonts/chillTodo.woff?fkymrx') format('woff'),
+    url('fonts/chillTodo.svg?fkymrx#chillTodo') format('svg');
+}
+
+i {
+  speak: never;
+
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: chillTodo, sans-serif !important;
+  font-weight: normal;
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-transform: none;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrow-left::before {
+  content: "\e910";
+}
+
+.icon-list::before {
+  content: "\e900";
+}
+
+.icon-stopwatch::before {
+  content: "\e90e";
+}
+
+.icon-calendar::before {
+  content: "\e901";
+}
+
+.icon-check::before {
+  content: "\e902";
+}
+
+.icon-close::before {
+  content: "\e903";
+}
+
+.icon-folder::before {
+  content: "\e904";
+}
+
+.icon-home::before {
+  content: "\e905";
+}
+
+.icon-notification::before {
+  content: "\e906";
+}
+
+.icon-plus::before {
+  content: "\e907";
+}
+
+.icon-plus-rectangle::before {
+  content: "\e908";
+}
+
+.icon-search::before {
+  content: "\e909";
+}
+
+.icon-settings::before {
+  content: "\e90a";
+}
+
+.icon-tasks::before {
+  content: "\e90b";
+}
+
+.icon-team::before {
+  content: "\e90c";
+}
+
+.icon-trash::before {
+  content: "\e90d";
+}

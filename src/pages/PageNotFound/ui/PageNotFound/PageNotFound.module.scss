@@ -1,0 +1,32 @@
+.main{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-xl);
+
+  width: 100%;
+  min-height: 100ch;
+}
+
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  text-align: center;
+}
+
+.title{
+  font-size: 98px;
+  font-weight: var(--fw-semibold);
+  color: hsl(var(--accent-danger-hs) var(--lt-300));
+}
+
+.text{
+  font-size: var(--fs-lg);
+  color: hsl(var(--accent-text-hs) var(--lt-300))
+}
+
+.image{
+  width: 100%;
+  height: 100%;
+  background: url("@icons/404_bg.jpg") top right/ cover no-repeat;
+}

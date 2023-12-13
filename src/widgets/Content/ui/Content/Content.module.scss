@@ -1,0 +1,6 @@
+.content {
+  display: flex;
+  grid-area: content;
+  gap: 20px;
+  padding: var(--gap-main) var(--gap-xxl);
+}

@@ -1,0 +1,36 @@
+.popup {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: end;
+
+  background-color: hsl(var(--neutral-grey-hs) var(--lt-200) / 20%);
+
+  &.centered {
+    justify-content: center;
+  }
+}
+
+.panel {
+  position: relative;
+
+  &.height100 {
+    height: 100%;
+  }
+
+  &.animation {
+    animation: popup 0.7s ease-in-out;
+  }
+}
+
+@keyframes popup {
+  0% {
+    right: -30%;
+  }
+
+  100% {
+    right: 0%;
+  }
+}

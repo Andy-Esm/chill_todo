@@ -1,0 +1,45 @@
+.progress {
+  &-wrapper {
+    position: relative;
+
+    width: 100%;
+    max-width: 100px;
+    height: 100%;
+    max-height: 100px;
+  }
+
+  &-svg {
+    fill: transparent;
+    stroke-width: 5px;
+  }
+
+  &-inner-circle {
+    transform-origin: center;
+    transform: rotate(-90deg);
+
+    stroke: hsl(var(--accent-warn-hs) var(--lt-500));
+    stroke-linecap: round;
+
+    transition: 0.5s linear;
+  }
+
+  &-outer-circle {
+    stroke: hsl(var(--accent-text-hs) var(--lt-100));
+  }
+
+  &-icon {
+    circle {
+      :first-of-type {
+        stroke: hsl(var(--accent-text-hs) var(--lt-100));
+      }
+    }
+  }
+
+  &-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+

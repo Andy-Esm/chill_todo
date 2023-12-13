@@ -1,0 +1,31 @@
+.deadline{
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: center;
+    justify-content: center;
+
+    font-family: var(--ff-main);
+    font-size: 12px;
+    line-height: 16.8px;
+    color: hsl(var(--accent-text-hs) var(--lt-300));
+  }
+
+  &-wrapper {
+    --size: 65px;
+
+    width: var(--size);
+    height: var(--size);
+  }
+
+  &-timer {
+    font-size: 18px;
+  }
+
+  &-circle {
+    max-width: none;
+    max-height: none;
+  }
+}
+

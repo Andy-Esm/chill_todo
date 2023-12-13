@@ -1,0 +1,27 @@
+.success {
+  color: var(--clr-accent-success);
+}
+  
+.warn {
+  color: var(--clr-accent-warn);
+}
+  
+.error {
+  color: var(--clr-accent-danger);
+}
+  
+.primary {
+  color: var(--clr-nav-main);
+}
+  
+.white {
+  color: var(--clr-accent-white);
+}
+  
+.default {
+  color: hsl(var(--neutral-grey-hs) var(--lt-900));
+}
+  
+.text {
+  color: hsl(var(--accent-text-hs) var(--lt-500));
+}

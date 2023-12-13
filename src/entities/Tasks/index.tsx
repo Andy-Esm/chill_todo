@@ -1,0 +1,10 @@
+
+export { getCurrentFilter } from './model/selectors/TaskSelectors'
+export { TaskReducer } from './model/slices/taskSlice'
+export { TaskCardsList } from './ui/TaskCardsList/TaskCardsList'
+export { TaskCircleDeadline } from './ui/TaskCircleDeadline/TaskCircleDeadline'
+export { TasksMenuList } from './ui/TasksMenuList/TasksMenuList'
+export { TaskCard } from './ui/TaskCard/TaskCard'
+export { TaskDueDate } from './ui/TaskDueDate/TaskDueDate'
+export { setFilter } from './model/slices/taskSlice'
+export * from './model/types/Task'

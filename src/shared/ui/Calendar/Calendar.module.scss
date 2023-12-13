@@ -1,0 +1,26 @@
+.custom-input {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+
+  padding: 5px 8px;
+
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--clr-nav-secondary);
+
+  background-color: transparent;
+  border: none;
+
+  & span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: var(--gap-sm);
+  }
+}
+
+.calendar {
+  font-size: 22px;
+}

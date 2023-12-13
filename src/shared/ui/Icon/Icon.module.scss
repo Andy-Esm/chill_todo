@@ -1,0 +1,27 @@
+.success {
+  fill: var(--clr-accent-success);
+}
+
+.warn {
+  fill: var(--clr-accent-warn);
+}
+
+.error {
+  fill: var(--clr-accent-danger);
+}
+
+.primary {
+  fill: var(--clr-nav-main);
+}
+
+.white {
+  fill: var(--clr-accent-white);
+}
+
+.default {
+  fill: hsl(var(--neutral-grey-hs) var(--lt-900));
+}
+
+.text {
+  fill: hsl(var(--accent-text-hs) var(--lt-500));
+}

@@ -1,0 +1,1 @@
+export { TabsNavigation, type TabProps } from './TabsNavigation'
