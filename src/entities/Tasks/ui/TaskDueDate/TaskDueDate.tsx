@@ -3,32 +3,34 @@ import { TaskCircleDeadline } from '../TaskCircleDeadline/TaskCircleDeadline'
 import styles from './TaskDueDate.module.scss'
 
 interface TaskDueDateProps {
-    startDate: Moment
-    finishDate: Moment
+  finishDate: Moment
+  startDate: Moment
 }
 
-export const TaskDueDate = ({startDate, finishDate} : TaskDueDateProps) => {
-
+export const TaskDueDate = ({ finishDate, startDate }: TaskDueDateProps) => {
   const transformDate = (date: Moment) => {
-    const firstRow = moment(date).calendar(null, {
-      sameDay: '[Сегодня, ]',
-      nextDay: '[Завтра, ]',
-      nextWeek: '[]',
-      lastDay: '[Вчера, ]',
-      lastWeek: '[]',
-      sameElse: '[]'
-    }) + moment(date).format('dddd, DD MMMM YYYY г.')
+    const firstRow =
+      moment(date).calendar(null, {
+        lastDay: '[Вчера, ]',
+        lastWeek: '[]',
+        nextDay: '[Завтра, ]',
+        nextWeek: '[]',
+        sameDay: '[Сегодня, ]',
+        sameElse: '[]',
+      }) + moment(date).format('dddd, DD MMMM YYYY г.')
 
     const secondRow = moment(date).format('HH:mm')
-    return {firstRow, secondRow}
+    return { firstRow, secondRow }
   }
   transformDate(finishDate)
-  return <div className={styles['task-due-date']}>
-    <div className={styles['task-due-text']}>
-      <span>Истекает</span>
-      <span className={styles['task-due-main-text']}>{transformDate(finishDate).firstRow }</span>
-      <span>{transformDate(finishDate).secondRow }</span>
+  return (
+    <div className={styles['task-due-date']}>
+      <div className={styles['task-due-text']}>
+        <span>Истекает</span>
+        <span className={styles['task-due-main-text']}>{transformDate(finishDate).firstRow}</span>
+        <span>{transformDate(finishDate).secondRow}</span>
+      </div>
+      <TaskCircleDeadline finish={finishDate} start={startDate} />
     </div>
-    <TaskCircleDeadline start={startDate} finish={finishDate}/>
-  </div>
+  )
 }

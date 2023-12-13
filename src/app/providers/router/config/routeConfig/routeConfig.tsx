@@ -1,53 +1,52 @@
-import { RouteProps } from 'react-router-dom'
-
 import { CalendarPage } from '@pages/CalendarPage'
 import { HomePage } from '@pages/HomePage'
-import { TeamsPage } from '@pages/TeamsPage'
+import { PageNotFound } from '@pages/PageNotFound'
 import { ProjectsPage } from '@pages/ProjectsPage'
 import { TasksPage } from '@pages/TasksPage'
-import {PageNotFound} from '@pages/PageNotFound'
+import { TeamsPage } from '@pages/TeamsPage'
+import { RouteProps } from 'react-router-dom'
 
 export enum AppRoutes {
-  HOME = 'home',
-  TASK = 'task',
-  KANBAN = 'kanban',
   CALENDAR = 'calendar',
+  HOME = 'home',
+  KANBAN = 'kanban',
+  NOT_FOUND = 'not_found',
   PROJECTS = 'projects',
-  NOT_FOUND = 'not_found'
+  TASK = 'task',
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
-  [AppRoutes.HOME]: '/',
-  [AppRoutes.TASK]: '/tasks',
-  [AppRoutes.KANBAN]: '/teams',
   [AppRoutes.CALENDAR]: '/calendar',
+  [AppRoutes.HOME]: '/',
+  [AppRoutes.KANBAN]: '/teams',
+  [AppRoutes.NOT_FOUND]: '*',
   [AppRoutes.PROJECTS]: '/projects',
-  [AppRoutes.NOT_FOUND]: '*'
+  [AppRoutes.TASK]: '/tasks',
 }
 
 export const routeConfig: Record<AppRoutes, RouteProps> = {
-  [AppRoutes.HOME]: {
-    path: RoutePath.home,
-    element: <HomePage/>
+  [AppRoutes.CALENDAR]: {
+    element: <CalendarPage />,
+    path: RoutePath.calendar,
   },
-  [AppRoutes.TASK]: {
-    path: RoutePath.task,
-    element: <TasksPage/>
+  [AppRoutes.HOME]: {
+    element: <HomePage />,
+    path: RoutePath.home,
   },
   [AppRoutes.KANBAN]: {
+    element: <TeamsPage />,
     path: RoutePath.kanban,
-    element: <TeamsPage/>
-  },
-  [AppRoutes.CALENDAR]: {
-    path: RoutePath.calendar,
-    element: <CalendarPage/>
-  },
-  [AppRoutes.PROJECTS]: {
-    path: RoutePath.projects,
-    element: <ProjectsPage/>
   },
   [AppRoutes.NOT_FOUND]: {
+    element: <PageNotFound />,
     path: RoutePath.not_found,
-    element: <PageNotFound/>
-  }
+  },
+  [AppRoutes.PROJECTS]: {
+    element: <ProjectsPage />,
+    path: RoutePath.projects,
+  },
+  [AppRoutes.TASK]: {
+    element: <TasksPage />,
+    path: RoutePath.task,
+  },
 }

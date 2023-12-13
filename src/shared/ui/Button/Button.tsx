@@ -1,26 +1,34 @@
+import classNames from 'classnames'
 import { ReactNode } from 'react'
 import styles from './Button.module.scss'
-import classNames from 'classnames'
 
 type ButtonSizes = 'full' | 'medium' | 'small'
 
-type ButtonStyles = 'primary' | 'cancel' | 'accept' | 'disabled' | 'outline'
+type ButtonStyles = 'accept' | 'cancel' | 'disabled' | 'outline' | 'primary'
 
 interface ButtonProps {
+  bold?: boolean
   children: ReactNode
+  className?: string
+  disabled?: boolean
+  filled?: boolean
+  onClick?: () => void
   size?: ButtonSizes
   style?: ButtonStyles
-  type?: 'submit' | 'button'
-  filled?: boolean
-  disabled?: boolean
+  type?: 'button' | 'submit'
   uppercase?: boolean
-  bold?: boolean
-  onClick?: () => void
-  className?: string
 }
 
 export const Button = (props: ButtonProps) => {
-  const { children, size = 'medium', style = 'cancel', onClick, type = 'button', disabled = false, className } = props
+  const {
+    children,
+    className,
+    disabled = false,
+    onClick,
+    size = 'medium',
+    style = 'cancel',
+    type = 'button',
+  } = props
   const btnStyle = styles[`btn-${style}`]
   const btnSize = styles[`btn-${size}`]
   const btnAllStyles = classNames(
@@ -28,15 +36,15 @@ export const Button = (props: ButtonProps) => {
     btnSize,
     btnStyle,
     {
+      [styles.bold]: props.bold,
       [styles.filled]: props.filled,
       [styles.uppercase]: props.uppercase,
-      [styles.bold]: props.bold
     },
-    className
+    className,
   )
 
   return (
-    <button className={btnAllStyles} onClick={onClick} type={type} disabled={disabled} >
+    <button className={btnAllStyles} disabled={disabled} onClick={onClick} type={type}>
       {children}
     </button>
   )

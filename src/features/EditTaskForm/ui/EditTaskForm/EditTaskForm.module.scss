@@ -2,11 +2,9 @@
   overflow-y: auto;
   display: grid;
   align-items: start;
-
   width: 560px;
   height: 100%;
   padding: 20px 16px 30px;
-
   background-color: var(--clr-accent-white);
   box-shadow: var(--shadow-sidebar);
 
@@ -60,9 +58,7 @@
 .taglist {
   display: flex;
   gap: 8px;
-
   padding: 8px;
-
   background-color: var(--clr-accent-white);
   border-radius: var(--radius-main);
   box-shadow: 0 4px 12px 1px rgb(34 139 207 / 25%);

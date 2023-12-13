@@ -1,19 +1,16 @@
-import { TagColor, Tag as TagComponent } from '@shared/ui/Tag'
 import { IconButton } from '@shared/ui/IconButton'
-
-import { Tag } from '../../model/types/Tag'
-
+import { TagColor, Tag as TagComponent } from '@shared/ui/Tag'
 import classNames from 'classnames'
+import { Tag } from '../../model/types/Tag'
 import styles from './TagList.module.scss'
 
 interface TagListProps {
-  tagList: Tag[] | undefined
-  onClick?: (tagId: string) => void
   onAdd?: (tagId: string) => void
+  onClick?: (tagId: string) => void
+  tagList: Tag[] | undefined
 }
 
-export const TagList = ({tagList, onAdd, onClick}: TagListProps) => {
-
+export const TagList = ({ onAdd, onClick, tagList }: TagListProps) => {
   const getWrappcolor = (color: TagColor) => {
     const tagWrappColor = styles[`tagwrapp-${color}`]
     return classNames(styles.tagwrapp, tagWrappColor)
@@ -21,18 +18,23 @@ export const TagList = ({tagList, onAdd, onClick}: TagListProps) => {
 
   return (
     <>
-      {tagList && tagList?.map(tag =>
-        <div key={tag.id} className={getWrappcolor(tag.color)}>
-          <TagComponent
-            color={tag.color}
-            transparent
-            onClick={()=> onAdd?.(tag?.id)}>
-            {tag.text}
-          </TagComponent>
-          {onClick && <IconButton form='rounded' iconName='icon-close' onClick={()=> onClick(tag.id)} style='error' className={styles.deletebtn} />}
-        </div>
-      )
-      }
+      {tagList &&
+        tagList?.map((tag) => (
+          <div className={getWrappcolor(tag.color)} key={tag.id}>
+            <TagComponent color={tag.color} onClick={() => onAdd?.(tag?.id)} transparent>
+              {tag.text}
+            </TagComponent>
+            {onClick && (
+              <IconButton
+                className={styles.deletebtn}
+                form='rounded'
+                iconName='icon-close'
+                onClick={() => onClick(tag.id)}
+                style='error'
+              />
+            )}
+          </div>
+        ))}
     </>
   )
 }

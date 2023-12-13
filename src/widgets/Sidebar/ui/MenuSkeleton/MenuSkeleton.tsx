@@ -1,21 +1,20 @@
+import { Skeleton } from '@shared/ui/Skeleton'
 import styles from './MenuSkeleton.module.scss'
-import {Skeleton} from '@shared/ui/Skeleton'
-
 
 export const MenuSkeleton = () => {
   return (
     <>
       <div className={styles.wrapper}>
-        <Skeleton width='24px' height='24px' radius='6px'/>
-        <Skeleton width='100%' height='16px'/>
+        <Skeleton height='24px' radius='6px' width='24px' />
+        <Skeleton height='16px' width='100%' />
       </div>
       <div className={styles.wrapper}>
-        <Skeleton width='24px' height='24px' radius='6px'/>
-        <Skeleton width='100%' height='16px'/>
+        <Skeleton height='24px' radius='6px' width='24px' />
+        <Skeleton height='16px' width='100%' />
       </div>
       <div className={styles.wrapper}>
-        <Skeleton width='24px' height='24px' radius='6px'/>
-        <Skeleton width='100%' height='16px'/>
+        <Skeleton height='24px' radius='6px' width='24px' />
+        <Skeleton height='16px' width='100%' />
       </div>
     </>
   )

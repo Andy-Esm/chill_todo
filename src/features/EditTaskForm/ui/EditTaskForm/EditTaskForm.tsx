@@ -1,62 +1,66 @@
-import { memo, useState } from 'react'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useForm } from 'react-hook-form'
-import moment from 'moment'
-
-import { Task, TaskDueDate, TaskType } from '@entities/Tasks'
-import { useClosePopup } from '@shared/lib/hooks/useClosePopup'
 import { TagList } from '@entities/Tags'
-import { CustomInput } from '@shared/ui/CustomInput'
-import { IconButton } from '@shared/ui/IconButton'
-import { FieldError } from '@shared/ui/FieldError'
-import { TextArea } from '@shared/ui/TextArea'
-import { Calendar } from '@shared/ui/Calendar'
-import { Popover } from '@shared/ui/Popover'
+import { Task, TaskDueDate, TaskType } from '@entities/Tasks'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useCreateTaskMutation, useUpdateTaskMutation } from '@shared/api'
+import { useClosePopup } from '@shared/lib/hooks/useClosePopup'
 import { Button } from '@shared/ui/Button'
+import { Calendar } from '@shared/ui/Calendar'
+import { CustomInput } from '@shared/ui/CustomInput'
+import { FieldError } from '@shared/ui/FieldError'
+import { IconButton } from '@shared/ui/IconButton'
+import { Popover } from '@shared/ui/Popover'
+import { TextArea } from '@shared/ui/TextArea'
 import { Title } from '@shared/ui/Title'
-
+import moment from 'moment'
+import { memo, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useSubtasks } from '../../hooks/useSubtasks/useSubtasks'
 import { useTags } from '../../hooks/useTags/useTags'
 import { EditTaskSchema } from '../../model/EditTaskSchema'
-import { useSubtasks } from '../../hooks/useSubtasks/useSubtasks'
 import { SubTasksList } from '../SubTasksList/SubTasksList'
-
 import styles from './EditTaskForm.module.scss'
-import { useCreateTaskMutation, useUpdateTaskMutation } from '@shared/api'
 
 export interface TaskEdit {
   id?: string | undefined
-  title: string 
-  text?: string | undefined
   subtask?: string | undefined
+  text?: string | undefined
+  title: string
 }
 
 interface EditTaskFormProps {
   task?: Task
 }
 
-export const EditTaskForm = memo(({task}: EditTaskFormProps) => {
+export const EditTaskForm = memo(({ task }: EditTaskFormProps) => {
   const deadlineDate = moment(task?.deadlineDate).toDate()
-  const [finishDate, setFinishDate] = useState<Date>(deadlineDate ?? new Date)
+  const [finishDate, setFinishDate] = useState<Date>(deadlineDate ?? new Date())
   const onChangeDate = (e: Date) => setFinishDate(e)
-  
+
   const closeEditTaskForm = useClosePopup()
   const [createTaskItem] = useCreateTaskMutation()
   const [updateTask] = useUpdateTaskMutation()
 
-  const {subTasks, addSubtask, changeSubtaskStatus, deleteSubtask, removedSubTasks} = useSubtasks(task)
-  const { taskTags, getTags, addTag, deleteTag, tagsData  } = useTags(task?.tagsIds)
+  const { addSubtask, changeSubtaskStatus, deleteSubtask, removedSubTasks, subTasks } =
+    useSubtasks(task)
+  const { addTag, deleteTag, getTags, tagsData, taskTags } = useTags(task?.tagsIds)
 
-  const defaultValues = task ? {...task} : {}
-  if ('tasks' in defaultValues ) {
+  const defaultValues = task ? { ...task } : {}
+  if ('tasks' in defaultValues) {
     delete defaultValues.tasks
   }
 
-  const {register, formState: {errors,isValid,}, handleSubmit, watch, setValue} = useForm<TaskEdit>({
-    resolver: yupResolver(EditTaskSchema),
+  const {
+    formState: { errors, isValid },
+    handleSubmit,
+    register,
+    setValue,
+    watch,
+  } = useForm<TaskEdit>({
+    defaultValues: task,
     mode: 'onChange',
-    defaultValues: task
+    resolver: yupResolver(EditTaskSchema),
   })
-  
+
   const dueStartDate = moment(task?.startDate) ?? moment()
 
   const handleAddSubtask = () => {
@@ -65,59 +69,117 @@ export const EditTaskForm = memo(({task}: EditTaskFormProps) => {
   }
 
   const onSubmit = async (data: TaskEdit) => {
-    const {subtask, ...task}= data //eslint-disable-line
-    const taskRequest: Task = {...task as Task, startDate: dueStartDate, deadlineDate: moment(finishDate), type: TaskType.CURRENT, tagsIds: taskTags}
-    const subTasksRequest = subTasks.map((task) => ({...task, deadlineDate: moment(finishDate) }))
-    task.id 
-      ? await updateTask({task: taskRequest, subtasks: subTasksRequest, removedSubtasks: removedSubTasks}) 
-      : await createTaskItem({ task: taskRequest, subtasks: subTasks})
+    const { subtask, ...task } = data //eslint-disable-line
+    const taskRequest: Task = {
+      ...(task as Task),
+      deadlineDate: moment(finishDate),
+      startDate: dueStartDate,
+      tagsIds: taskTags,
+      type: TaskType.CURRENT,
+    }
+    const subTasksRequest = subTasks.map((task) => ({ ...task, deadlineDate: moment(finishDate) }))
+    task.id
+      ? await updateTask({
+          removedSubtasks: removedSubTasks,
+          subtasks: subTasksRequest,
+          task: taskRequest,
+        })
+      : await createTaskItem({ subtasks: subTasks, task: taskRequest })
     closeEditTaskForm()
   }
 
   return (
-    <form className={styles['edit-task-form']}  onSubmit={handleSubmit(onSubmit)}>
+    <form className={styles['edit-task-form']} onSubmit={handleSubmit(onSubmit)}>
       <div className={styles['edit-task-form-content']}>
         <div className={styles['edit-task-form-header']}>
-          <IconButton iconName='icon-arrow-left' size='large' form='circle' style='primary' onClick={closeEditTaskForm} className={styles.arrow}/>
+          <IconButton
+            className={styles.arrow}
+            form='circle'
+            iconName='icon-arrow-left'
+            onClick={closeEditTaskForm}
+            size='large'
+            style='primary'
+          />
           <span>
-            <Calendar readonly={false} setDate={finishDate} onChange={onChangeDate} />
+            <Calendar onChange={onChangeDate} readonly={false} setDate={finishDate} />
           </span>
         </div>
         <div>
           <div>
-            <TextArea name='title' type='title' register={register('title')} placeholder='Название задачи...' className={styles.name} />
+            <TextArea
+              className={styles.name}
+              name='title'
+              placeholder='Название задачи...'
+              register={register('title')}
+              type='title'
+            />
             <FieldError>{errors.title?.message}</FieldError>
           </div>
-          <TextArea name='text' type='text' register={register('text')} placeholder='Введите текст задачи...'/>
+          <TextArea
+            name='text'
+            placeholder='Введите текст задачи...'
+            register={register('text')}
+            type='text'
+          />
         </div>
         <div>
-          <TaskDueDate startDate={dueStartDate} finishDate={moment(finishDate)}/>
+          <TaskDueDate finishDate={moment(finishDate)} startDate={dueStartDate} />
         </div>
         <div>
-          <Popover renderButton={() => <div><Title tag='h3' fontFamily='main' className={styles.tagstitle}>Теги</Title></div>}
-            renderPanel={() => <div className={styles.taglist}>{tagsData && <TagList tagList={tagsData} onAdd={addTag} />}</div>}
-            placementPanel='bottom-start' offsetY={8} />
+          <Popover
+            offsetY={8}
+            placementPanel='bottom-start'
+            renderButton={() => (
+              <div>
+                <Title className={styles.tagstitle} fontFamily='main' tag='h3'>
+                  Теги
+                </Title>
+              </div>
+            )}
+            renderPanel={() => (
+              <div className={styles.taglist}>
+                {tagsData && <TagList onAdd={addTag} tagList={tagsData} />}
+              </div>
+            )}
+          />
         </div>
         <div className={styles.settags}>
-          {taskTags && <TagList tagList={getTags(taskTags)} onClick={deleteTag} />}
+          {taskTags && <TagList onClick={deleteTag} tagList={getTags(taskTags)} />}
         </div>
         <div>
-          <Title tag='h3' fontFamily='main' className={styles.subtitle}>Подзадачи</Title>
-          <CustomInput type='text' className={styles['subtask-input']} register={register('subtask')}/>
-          <Button style='outline' className={styles['add-subtask']} onClick={handleAddSubtask}> Добавить подзадачу </Button>
-          <SubTasksList 
-            subTasks={subTasks} 
+          <Title className={styles.subtitle} fontFamily='main' tag='h3'>
+            Подзадачи
+          </Title>
+          <CustomInput
+            className={styles['subtask-input']}
+            register={register('subtask')}
+            type='text'
+          />
+          <Button className={styles['add-subtask']} onClick={handleAddSubtask} style='outline'>
+            {' '}
+            Добавить подзадачу{' '}
+          </Button>
+          <SubTasksList
+            checkedStatus={TaskType.COMPLETED}
             onCheckboxClick={changeSubtaskStatus}
-            checkedStatus = {TaskType.COMPLETED}
             onDelete={deleteSubtask}
+            subTasks={subTasks}
           />
         </div>
         <div className={styles['edit-task-form-actions']}>
-          <Button size='small' type='submit' style={isValid ? 'accept': 'disabled'} disabled={!isValid}>{`${task ? 'Обновить ' : 'Создать'} задачу`}</Button>
-          <Button style='cancel' size='small' onClick={closeEditTaskForm}>Отмена</Button>
+          <Button
+            disabled={!isValid}
+            size='small'
+            style={isValid ? 'accept' : 'disabled'}
+            type='submit'
+          >{`${task ? 'Обновить ' : 'Создать'} задачу`}</Button>
+          <Button onClick={closeEditTaskForm} size='small' style='cancel'>
+            Отмена
+          </Button>
         </div>
       </div>
-    
     </form>
   )
 })
+
+EditTaskForm.displayName = 'EditTaskForm'

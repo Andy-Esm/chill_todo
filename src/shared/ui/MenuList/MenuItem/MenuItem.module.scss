@@ -2,10 +2,7 @@
   display: flex;
   gap: var(--gap-sm);
   align-items: center;
-
   padding: var(--gap-sm);
-
-
   transition: all 0.2s ease-in-out;
 
   &-main {
@@ -55,7 +52,6 @@
   &_title {
     overflow: hidden;
     display: -webkit-box;
-
     width: 100%;
 
     -webkit-box-orient: vertical;

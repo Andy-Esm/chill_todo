@@ -1,15 +1,15 @@
-import styles from './AddTaskCard.module.scss'
 import { IconFont } from '@shared/ui/IconFont'
+import styles from './AddTaskCard.module.scss'
 
 interface AddTaskCardProps {
-    onClick?: () => void
+  onClick?: () => void
 }
 
-export const AddTaskCard = ({onClick}:AddTaskCardProps) => {
+export const AddTaskCard = ({ onClick }: AddTaskCardProps) => {
   return (
     <div className={styles['add-task-card']} onClick={onClick}>
       <div className={styles['add-icon-button']}>
-        <IconFont iconName='icon-plus-rectangle' color='white' className={styles['add-icon']}/>
+        <IconFont className={styles['add-icon']} color='white' iconName='icon-plus-rectangle' />
       </div>
     </div>
   )

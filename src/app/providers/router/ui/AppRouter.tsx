@@ -1,14 +1,13 @@
-import {Route, Routes} from 'react-router-dom'
-import {routeConfig} from '../config/routeConfig/routeConfig'
-import {Suspense} from 'react'
-
+import { Suspense } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import { routeConfig } from '../config/routeConfig/routeConfig'
 
 export const AppRouter = () => {
-  return(
+  return (
     <Suspense>
       <Routes>
-        {Object.values(routeConfig).map(({path: path, element: element}) => (
-          <Route key={path} element={element} path={path}/>
+        {Object.values(routeConfig).map(({ element: element, path: path }) => (
+          <Route element={element} key={path} path={path} />
         ))}
       </Routes>
     </Suspense>

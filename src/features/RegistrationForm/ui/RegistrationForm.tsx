@@ -1,16 +1,16 @@
-import { memo } from 'react'
-import classNames from 'classnames'
-import styles from './RegistrationForm.module.scss'
-import { Title } from '@shared/ui/Title'
-import { CustomInput } from '@shared/ui/CustomInput'
-import { Checkbox } from '@shared/ui/Checkbox'
-import { Button } from '@shared/ui/Button'
-import { useForm } from 'react-hook-form'
 import { User } from '@entities/User'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { RegisterSchema } from '../model/types/RegisterSchema'
-import { useRegisterMutation } from '../api/registerApi'
+import { Button } from '@shared/ui/Button'
+import { Checkbox } from '@shared/ui/Checkbox'
+import { CustomInput } from '@shared/ui/CustomInput'
 import { FieldError } from '@shared/ui/FieldError'
+import { Title } from '@shared/ui/Title'
+import classNames from 'classnames'
+import { memo } from 'react'
+import { useForm } from 'react-hook-form'
+import { useRegisterMutation } from '../api/registerApi'
+import { RegisterSchema } from '../model/types/RegisterSchema'
+import styles from './RegistrationForm.module.scss'
 interface RegistrationFormProps {
   onSuccess: () => void
 }
@@ -20,18 +20,26 @@ interface UserRegister extends User {
 }
 
 export const RegistrationForm = memo(({ onSuccess }: RegistrationFormProps) => {
-  const Confirm = <span>Я согласен на <a href="#">обработку персональных данных</a></span>
+  const Confirm = (
+    <span>
+      Я согласен на <a href='#'>обработку персональных данных</a>
+    </span>
+  )
 
   const [registerUser] = useRegisterMutation()
 
-  const {register, handleSubmit, formState: {errors, isValid}} = useForm<UserRegister>({
+  const {
+    formState: { errors, isValid },
+    handleSubmit,
+    register,
+  } = useForm<UserRegister>({
+    mode: 'onChange',
     resolver: yupResolver(RegisterSchema),
-    mode: 'onChange'
   })
 
   const onSubmit = (data: UserRegister) => {
     //eslint-disable-next-line
-    const {confirmPassword, ...user} = data
+    const { confirmPassword, ...user } = data
     registerUser(user)
     alert('Отправка данных формы регистрации')
     onSuccess()
@@ -42,35 +50,67 @@ export const RegistrationForm = memo(({ onSuccess }: RegistrationFormProps) => {
   const passwordError = errors.password?.message
   const confirmPassworError = errors.confirmPassword?.message
 
-
   return (
     <form className={classNames(styles.form)}>
       <Title center>Регистрация</Title>
       <div className={styles.field}>
-        <CustomInput id='1' name='name' type='text' label='Имя пользователя*:' register={register('name')} className={nameError ? classNames(styles.invalid) : ''} />
+        <CustomInput
+          className={nameError ? classNames(styles.invalid) : ''}
+          id='1'
+          label='Имя пользователя*:'
+          name='name'
+          register={register('name')}
+          type='text'
+        />
         <FieldError backlight={true}>{errors.name?.message}</FieldError>
       </div>
       <div className={styles.field}>
-        <CustomInput id='2' name='email' type='text' label='E-mail*:' register={register('email')} className={emailError ? classNames(styles.invalid) : ''} />
+        <CustomInput
+          className={emailError ? classNames(styles.invalid) : ''}
+          id='2'
+          label='E-mail*:'
+          name='email'
+          register={register('email')}
+          type='text'
+        />
         <FieldError backlight={true}>{errors.email?.message}</FieldError>
       </div>
       <div className={styles.field}>
-        <CustomInput id='3' name='password' type='password' label='Пароль*:' register={register('password')} className={passwordError ? classNames(styles.invalid) : ''} />
+        <CustomInput
+          className={passwordError ? classNames(styles.invalid) : ''}
+          id='3'
+          label='Пароль*:'
+          name='password'
+          register={register('password')}
+          type='password'
+        />
         <FieldError backlight={true}>{errors.password?.message}</FieldError>
       </div>
       <div className={styles.field}>
-        <CustomInput id='4' name='password_repeat' type='password' label='Повтори пароль*:' register={register('confirmPassword')}  className={confirmPassworError ? classNames(styles.invalid) : ''} />
+        <CustomInput
+          className={confirmPassworError ? classNames(styles.invalid) : ''}
+          id='4'
+          label='Повтори пароль*:'
+          name='password_repeat'
+          register={register('confirmPassword')}
+          type='password'
+        />
         <FieldError backlight={true}>{errors.confirmPassword?.message}</FieldError>
       </div>
       <div className={styles.footer}>
-        <Checkbox text={Confirm} className={styles.checkbox} {...register('confirm')} crossout={false}/>
+        <Checkbox
+          className={styles.checkbox}
+          text={Confirm}
+          {...register('confirm')}
+          crossout={false}
+        />
         <Button
-          type='submit'
-          style={isValid ? 'primary': 'disabled'}
-          filled
-          size='full'
-          onClick={handleSubmit(onSubmit)}
           disabled={!isValid}
+          filled
+          onClick={handleSubmit(onSubmit)}
+          size='full'
+          style={isValid ? 'primary' : 'disabled'}
+          type='submit'
         >
           <Title tag='h2'>Зарегистрироваться</Title>
         </Button>
@@ -78,3 +118,5 @@ export const RegistrationForm = memo(({ onSuccess }: RegistrationFormProps) => {
     </form>
   )
 })
+
+RegistrationForm.displayName = 'RegistrationForm'

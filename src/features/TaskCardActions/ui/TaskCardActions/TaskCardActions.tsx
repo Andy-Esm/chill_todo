@@ -1,7 +1,6 @@
 import { ResponseTask, TaskType } from '@entities/Tasks'
 import { useDeleteTaskMutation, useUpdateTaskStatusMutation } from '@shared/api'
 import { IconButton } from '@shared/ui/IconButton'
-
 import styles from './TaskCardActions.module.scss'
 
 interface TaskCardActionsProps {
@@ -26,18 +25,18 @@ export const TaskCardActions = ({ task }: TaskCardActionsProps) => {
   return (
     <div className={styles['task-actions']}>
       <IconButton
-        iconName='icon-check'
-        size='medium'
         form='circle'
-        style='success'
+        iconName='icon-check'
         onClick={handleSubmit}
+        size='medium'
+        style='success'
       />
       <IconButton
-        iconName='icon-close'
         form='circle'
+        iconName='icon-close'
+        onClick={handleDelete}
         size='medium'
         style='error'
-        onClick={handleDelete}
       />
     </div>
   )

@@ -1,10 +1,9 @@
+import { NotificationList } from '@entities/Notification'
 import { useCreateTaskNotification } from '@features/CreateNotification'
 import { useSetReadNotifications } from '@features/SetReadNotifications'
-import { NotificationList } from '@entities/Notification'
 import { useGetNotificationsListQuery } from '@shared/api'
-import { Popover } from '@shared/ui/Popover'
 import { IconFont } from '@shared/ui/IconFont'
-
+import { Popover } from '@shared/ui/Popover'
 import styles from './NotificationButton.module.scss'
 
 export const NotificationButton = () => {
@@ -19,13 +18,13 @@ export const NotificationButton = () => {
     <Popover
       offsetY={20}
       renderButton={() => (
-        <IconFont iconName='icon-notification' color='primary' className={styles['icon']} />
+        <IconFont className={styles['icon']} color='primary' iconName='icon-notification' />
       )}
       renderPanel={() => (
         <NotificationList
-          notifications={filteredNotifications}
-          isLoading={isLoading}
           height={320}
+          isLoading={isLoading}
+          notifications={filteredNotifications}
           onItemsRendered={handleSetLastIndex}
           setIsOpen={handleMount}
         />

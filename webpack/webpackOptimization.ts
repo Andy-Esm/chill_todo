@@ -1,11 +1,8 @@
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 
-export function webpackOptimization(){
+export function webpackOptimization() {
   return {
-    minimizer:[
-      new CssMinimizerPlugin()
-    ],
+    minimizer: [new CssMinimizerPlugin()],
     runtimeChunk: false,
-
   }
 }

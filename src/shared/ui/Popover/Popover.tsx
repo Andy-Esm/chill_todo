@@ -1,44 +1,42 @@
+import { Popover as HPopover } from '@headlessui/react'
+import { Placement } from '@popperjs/core'
+import classNames from 'classnames'
 import { useState } from 'react'
 import { usePopper } from 'react-popper'
-import { Placement } from '@popperjs/core'
-import { Popover as HPopover} from '@headlessui/react'
-
 import popstyles from './Popover.module.scss'
-import classNames from 'classnames'
 
 interface PopoverProps {
-    classname?: string
-    renderButton: ()=> JSX.Element
-    renderPanel: ()=>JSX.Element
-    placementPanel?: Placement
-    offsetX?: number
-    offsetY?: number
+  classname?: string
+  offsetX?: number
+  offsetY?: number
+  placementPanel?: Placement
+  renderButton: () => JSX.Element
+  renderPanel: () => JSX.Element
 }
 
 export const Popover = (props: PopoverProps) => {
-  const {renderButton, renderPanel, placementPanel, classname, offsetX, offsetY} = props
-  const [referenceElement, setReferenceElement] = useState<null | HTMLElement>()
-  const [popperElement, setPopperElement] = useState<null | HTMLElement>()
-  
-  const { styles, attributes } = usePopper(referenceElement, popperElement, 
-    {placement: placementPanel, 
-      modifiers: [{
+  const { classname, offsetX, offsetY, placementPanel, renderButton, renderPanel } = props
+  const [referenceElement, setReferenceElement] = useState<HTMLElement | null>()
+  const [popperElement, setPopperElement] = useState<HTMLElement | null>()
+
+  const { attributes, styles } = usePopper(referenceElement, popperElement, {
+    modifiers: [
+      {
         name: 'offset',
         options: {
-          offset: [offsetX, offsetY]
-        }
-      }]
-    })
-  
+          offset: [offsetX, offsetY],
+        },
+      },
+    ],
+    placement: placementPanel,
+  })
+
   const buttonCls = classNames(popstyles['pop-button'], classname)
 
   return (
     <HPopover>
-      
-      <HPopover.Button 
-        as={'div'} 
-        ref={setReferenceElement} 
-        className={buttonCls}>{renderButton()}
+      <HPopover.Button as={'div'} className={buttonCls} ref={setReferenceElement}>
+        {renderButton()}
       </HPopover.Button>
 
       <HPopover.Panel
@@ -49,7 +47,6 @@ export const Popover = (props: PopoverProps) => {
       >
         {renderPanel()}
       </HPopover.Panel>
-      
     </HPopover>
   )
 }

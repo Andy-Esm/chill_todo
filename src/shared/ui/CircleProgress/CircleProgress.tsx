@@ -1,6 +1,6 @@
-import styles from './CircleProgress.module.scss'
-import { ReactNode } from 'react'
 import classNames from 'classnames'
+import { ReactNode } from 'react'
+import styles from './CircleProgress.module.scss'
 
 interface CircleProgressProps {
   className?: string
@@ -8,19 +8,26 @@ interface CircleProgressProps {
   renderContent?: () => ReactNode | null
 }
 
-export const CircleProgress = ({current, className, renderContent = () => null}:CircleProgressProps) => {
+export const CircleProgress = ({
+  className,
+  current,
+  renderContent = () => null,
+}: CircleProgressProps) => {
   const totalPercent = 314
-  const currentPercent = 314/100*current
-  return <div className={classNames(styles['progress-wrapper'], className)}>
-    <svg viewBox='0 0 106 106' className={styles['progress-svg']} >
-      <circle 
-        className={styles['progress-outer-circle']} 
-        r="50" cx="50%" cy="50%"/>
-      <circle 
-        className={styles['progress-inner-circle']} 
-        style={{strokeDasharray: `${currentPercent}px ${totalPercent}px`}} 
-        r="50" cx='50%' cy="50%"/>
-    </svg>
-    <div className={styles['progress-content']}>{renderContent()}</div>
-  </div>
+  const currentPercent = (314 / 100) * current
+  return (
+    <div className={classNames(styles['progress-wrapper'], className)}>
+      <svg className={styles['progress-svg']} viewBox='0 0 106 106'>
+        <circle className={styles['progress-outer-circle']} cx='50%' cy='50%' r='50' />
+        <circle
+          className={styles['progress-inner-circle']}
+          cx='50%'
+          cy='50%'
+          r='50'
+          style={{ strokeDasharray: `${currentPercent}px ${totalPercent}px` }}
+        />
+      </svg>
+      <div className={styles['progress-content']}>{renderContent()}</div>
+    </div>
+  )
 }

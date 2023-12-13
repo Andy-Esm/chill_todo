@@ -1,1 +1,1 @@
-export {TasksPageLazy as TasksPage} from './ui/TasksPage/TasksPageLazy'
+export { TasksPageLazy as TasksPage } from './ui/TasksPage/TasksPageLazy'

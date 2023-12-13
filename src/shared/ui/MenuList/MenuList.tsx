@@ -1,15 +1,22 @@
 import { MenuItem } from './MenuItem/MenuItem'
 interface MenuListNavigation {
-  menuList: MenuItem []
+  menuList: MenuItem[]
   onClick?: (item: string) => void
 }
 
 export const MenuList = ({ menuList, onClick }: MenuListNavigation) => {
-
-  return(
+  return (
     <nav>
-      {menuList.map(({ type, icon, title, to, count }) => (
-        <MenuItem type={type} key={title} icon={icon} title={title} to={to} count={count} onClick={onClick} />
+      {menuList.map(({ count, icon, title, to, type }) => (
+        <MenuItem
+          count={count}
+          icon={icon}
+          key={title}
+          onClick={onClick}
+          title={title}
+          to={to}
+          type={type}
+        />
       ))}
     </nav>
   )

@@ -29,5 +29,5 @@ export const useTags = (tagsId: string[] | void) => {
     setTaskTags(taskTags.filter((tag) => tag !== id))
   }
 
-  return { taskTags, getTags, addTag, deleteTag, normalizedTags, tagsData }
+  return { addTag, deleteTag, getTags, normalizedTags, tagsData, taskTags }
 }

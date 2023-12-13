@@ -4,9 +4,9 @@ export enum NotificationTag {
 
 export interface Notification {
   id?: string
-  user?: string
-  text: string
+  isRead?: boolean
   tag: NotificationTag
   taskId: string
-  isRead?: boolean
+  text: string
+  user?: string
 }

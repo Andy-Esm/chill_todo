@@ -1,13 +1,12 @@
-import moment from 'moment'
-import { useEffect, useMemo } from 'react'
-
 import { NotificationTag } from '@entities/Notification'
 import { TaskType } from '@entities/Tasks'
+import { useGetTasksQuery } from '@shared/api'
+import moment from 'moment'
+import { useEffect, useMemo } from 'react'
 import {
   useCreateNotificationMutation,
   useUpdateTaskListMutation,
 } from '../../api/createNotificationApi'
-import { useGetTasksQuery } from '@shared/api'
 
 export function useCreateTaskNotification() {
   const { data: tasks } = useGetTasksQuery(undefined, { pollingInterval: 20000 })
@@ -37,9 +36,9 @@ export function useCreateTaskNotification() {
             })
 
             const notifications = updatedTasks.map((task) => ({
-              text: `Задача ${task.title} просрочена`,
               tag: NotificationTag.TASK,
               taskId: task.id,
+              text: `Задача ${task.title} просрочена`,
             }))
             await createNotification(notifications)
           }

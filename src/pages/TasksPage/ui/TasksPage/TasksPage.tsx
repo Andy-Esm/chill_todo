@@ -5,7 +5,7 @@ const TasksPage = () => {
   return (
     <div className={styles['tasks-page']}>
       <h1 className={styles.title}>Список задач</h1>
-      <TasksPageContent/>
+      <TasksPageContent />
     </div>
   )
 }

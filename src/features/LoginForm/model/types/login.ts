@@ -1,5 +1,5 @@
 export interface Login {
-    email: string
-    password: string
-    stayOn: boolean
+  email: string
+  password: string
+  stayOn: boolean
 }

@@ -1,40 +1,40 @@
-import {MouseEvent} from 'react'
-import classNames from 'classnames'
 import { IconFont, IconName } from '@shared/ui/IconFont'
-
+import classNames from 'classnames'
+import { MouseEvent } from 'react'
 import styles from './IconButton.module.scss'
 
-type IconButtonSize = 'small' | 'medium' | 'large';
-type IconButtonStyle = 'primary' | 'warn' | 'error' | 'success' | 'default' | 'text';
-type IconButtonForm = 'rounded' | 'square' | 'circle';
+type IconButtonSize = 'large' | 'medium' | 'small'
+type IconButtonStyle = 'default' | 'error' | 'primary' | 'success' | 'text' | 'warn'
+type IconButtonForm = 'circle' | 'rounded' | 'square'
 interface IconButtonProps {
-	iconName: IconName
-	size?: IconButtonSize
-	style?: IconButtonStyle
-	form: IconButtonForm;
-	onClick?: (e: MouseEvent) => void
-	className?: string;
+  className?: string
+  form: IconButtonForm
+  iconName: IconName
+  onClick?: (e: MouseEvent) => void
+  size?: IconButtonSize
+  style?: IconButtonStyle
 }
 
 export const IconButton = ({
-  style = 'primary',
-  size = 'small',
+  className,
   form = 'rounded',
   iconName,
   onClick,
-  className,
+  size = 'small',
+  style = 'primary',
 }: IconButtonProps) => {
   const allStyles = classNames(
     styles['icon-btn'],
     styles[style],
     styles[size],
     styles[form],
-    className
+    className,
   )
   return (
-    <button onClick={onClick} className={allStyles}>
-      <IconFont 
-        iconName={iconName}/>
+    <button className={allStyles} onClick={onClick}>
+      <IconFont iconName={iconName} />
     </button>
   )
 }
+
+IconButton.displayname = 'IconButton'

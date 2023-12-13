@@ -5,7 +5,6 @@
   width: 256px;
   height: 320px;
   padding: 12px 0;
-
   background-color: #fff;
   border-radius: var(--radius-main);
   box-shadow: 0 4px 12px 1px rgb(34 139 207 / 25%);
@@ -13,15 +12,11 @@
 
 .notification {
   cursor: pointer;
-
   position: relative;
-
   display: flex;
-
   max-width: inherit;
   margin-top: 12px;
   padding: var(--notification-padding);
-
   text-wrap: wrap;
 
   &:first-child {
@@ -51,12 +46,9 @@
 
 .hidden {
   position: absolute;
-
   display: flex;
-
   padding: var(--notification-padding);
   padding-right: calc(var(--notification-padding) + var(--scrollbar-size));
-
   color: rgb(255 255 255 / 0%);
   text-wrap: wrap;
 }

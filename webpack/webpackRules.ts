@@ -1,14 +1,14 @@
-import webpack from 'webpack'
-import {IWebpackOptions} from './webpackTypes'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import webpack from 'webpack'
+import { IWebpackOptions } from './webpackTypes'
 
-export function webpackRules({isDev}:IWebpackOptions):webpack.RuleSetRule[]{
-  const tsLoader =  {
+export function webpackRules({ isDev }: IWebpackOptions): webpack.RuleSetRule[] {
+  const tsLoader = {
+    exclude: /node_modules/,
     test: /\.tsx?$/,
     use: {
       loader: 'ts-loader',
     },
-    exclude: /node_modules/,
   }
   const styleLoader = {
     test: /\.s?css$/i,
@@ -18,35 +18,30 @@ export function webpackRules({isDev}:IWebpackOptions):webpack.RuleSetRule[]{
         loader: 'css-loader',
         options: {
           modules: {
+            auto: (resPath: string) => !!resPath.includes('.module.'),
             localIdentName: '[name]__[local]--[hash:base64:5]',
-            auto: (resPath:string) => !!resPath.includes('.module.'),
           },
         },
       },
       'sass-loader',
     ],
   }
-  const assetsLoader =  {
-    test: /\.(png|jpg|jpeg|gif)$/i,
-    type: 'asset/resource',
+  const assetsLoader = {
     generator: {
       filename: 'images/[name][ext][query]',
     },
+    test: /\.(png|jpg|jpeg|gif)$/i,
+    type: 'asset/resource',
   }
 
   const svgLoader = {
+    issuer: /\.[jt]sx?$/,
     loader: '@svgr/webpack',
     options: {
       icon: true,
     },
-    issuer: /\.[jt]sx?$/,
     test: /\.svg$/i,
   }
 
-  return[
-    tsLoader,
-    styleLoader,
-    assetsLoader,
-    svgLoader
-  ]
+  return [tsLoader, styleLoader, assetsLoader, svgLoader]
 }

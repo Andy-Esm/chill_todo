@@ -2,22 +2,22 @@ import { Moment } from 'moment'
 
 export enum TaskType {
   ALL = 'all',
-  CURRENT = 'current',
   COMPLETED = 'completed',
-  OVERDUE = 'overdue',
+  CURRENT = 'current',
   DEFERRED = 'deferred',
+  OVERDUE = 'overdue',
 }
 export interface Task {
-  id?: string
-  title: string
-  text?: string
-  type: TaskType
-  startDate: Moment
   deadlineDate?: Moment
-  taskId?: string
-  tagsIds?: string[]
+  id?: string
   isSubtask?: boolean
+  startDate: Moment
+  tagsIds?: string[]
+  taskId?: string
   tasks?: ResponseTask[]
+  text?: string
+  title: string
+  type: TaskType
 }
 
 export interface ResponseTask extends Omit<Task, 'id'> {
@@ -26,9 +26,9 @@ export interface ResponseTask extends Omit<Task, 'id'> {
 }
 
 export interface TaskDTO {
-  task: Task
-  subtasks: SubTask[]
   removedSubtasks?: string[]
+  subtasks: SubTask[]
+  task: Task
 }
 
 export interface ServerResponse {
