@@ -1,21 +1,19 @@
-import { useEffect, useState } from 'react'
+import { TagList } from '@entities/Tags'
+import { ResponseTask, TaskCard, TaskCardsList, TaskType } from '@entities/Tasks'
+import { EditTaskForm, useTags } from '@features/EditTaskForm'
 import { TaskCardActions } from '@features/TaskCardActions'
 import { TasksFilterTabs } from '@features/TasksFilterTabs'
-import { TaskCardsList, TaskCard, TaskType, ResponseTask } from '@entities/Tasks'
+import { useGetTasksQuery } from '@shared/api'
+import { SearchTaskFilter } from '@shared/lib/helpers'
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks/redux'
 import { UiActions } from '@shared/lib/store/UiSlice'
 import { Search } from '@shared/ui/Search'
-import { SearchTaskFilter } from '@shared/lib/helpers'
-import { useGetTasksQuery } from '@shared/api'
-import { EditTaskForm, useTags } from '@features/EditTaskForm'
-import { TagList } from '@entities/Tags'
-
+import { useEffect, useState } from 'react'
 
 export const TasksPageContent = () => {
-
-  const {data: tasks, isLoading: tasksLoading} = useGetTasksQuery()
+  const { data: tasks, isLoading: tasksLoading } = useGetTasksQuery()
   const dispatch = useAppDispatch()
-  const {currentFilter} = useAppSelector(state => state.tasks)
+  const { currentFilter } = useAppSelector((state) => state.tasks)
   const [searchedTask, setSearchedTask] = useState<ResponseTask[]>([])
 
   const { getTags } = useTags()
@@ -34,7 +32,7 @@ export const TasksPageContent = () => {
   }
 
   const editTask = (task: ResponseTask) => {
-    dispatch(UiActions.openPopup(<EditTaskForm task={task}/>))
+    dispatch(UiActions.openPopup(<EditTaskForm task={task} />))
   }
 
   const addTask = () => {
@@ -42,28 +40,31 @@ export const TasksPageContent = () => {
   }
 
   const renderSearch = () => {
-    return <Search placeholder='Поиск по задачам ...' delay={1000} onChange={onSearch} />
+    return <Search delay={1000} onChange={onSearch} placeholder='Поиск по задачам ...' />
   }
 
-  const filteredTasks = currentFilter === TaskType.ALL ? searchedTask : searchedTask?.filter((task)=> task.type === currentFilter)
+  const filteredTasks =
+    currentFilter === TaskType.ALL
+      ? searchedTask
+      : searchedTask?.filter((task) => task.type === currentFilter)
 
-  return   (
+  return (
     <>
       <TasksFilterTabs renderSearch={renderSearch()} />
       <TaskCardsList
+        addTask={addTask}
         isLoading={tasksLoading}
-        tasks={filteredTasks}
         renderTask={(task: ResponseTask) => (
           <div key={task.id}>
             <TaskCard
-              task={task}
               onClick={editTask}
               renderActions={(task) => <TaskCardActions task={task} />}
-              renderTags = {(task) => <TagList tagList={getTags(task?.tagsIds)} />}
+              renderTags={(task) => <TagList tagList={getTags(task?.tagsIds)} />}
+              task={task}
             />
           </div>
         )}
-        addTask={addTask}
+        tasks={filteredTasks}
       />
     </>
   )

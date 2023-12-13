@@ -1,27 +1,18 @@
+import classNames from 'classnames'
 import { UseFormRegisterReturn } from 'react-hook-form'
 import styles from './TextArea.module.scss'
-import classNames from 'classnames'
 
 export interface TextAreaProps {
   className?: string
-  name: 'title' | 'text'
-  type?: 'title' | 'text'
+  name: 'text' | 'title'
   placeholder?: string
   register?: UseFormRegisterReturn<string>
+  type?: 'text' | 'title'
 }
 
-export const TextArea = ({ name, type, placeholder, register, className }: TextAreaProps) => {
-
+export const TextArea = ({ className, name, placeholder, register, type }: TextAreaProps) => {
   const textareaType = styles[`custom-area-${type}`]
   const textareaStyles = classNames(styles['custom-area'], textareaType, className)
 
-  return (
-    <textarea
-      name={name}
-      className={textareaStyles}
-      {...register}
-      placeholder={placeholder}
-
-    />
-  )
+  return <textarea className={textareaStyles} name={name} {...register} placeholder={placeholder} />
 }

@@ -1,33 +1,35 @@
+import ru from 'date-fns/locale/ru'
 import { forwardRef } from 'react'
 import DatePicker, { registerLocale } from 'react-datepicker'
-import ru from 'date-fns/locale/ru'
 registerLocale('ru', ru)
 
+import { IconFont } from '../IconFont'
+import styles from './Calendar.module.scss'
 import 'react-datepicker/dist/react-datepicker.css'
 import 'react-datepicker/dist/react-datepicker-cssmodules.css'
 
-import styles from './Calendar.module.scss'
-import { IconFont } from '../IconFont'
-
 interface CalendarProps {
-  setDate: Date
-  readonly?: boolean
   onChange: (value: Date) => void
+  readonly?: boolean
+  setDate: Date
 }
 
 type CustomCalendarProps = React.HTMLProps<HTMLDivElement>
-const CustomInput = forwardRef<HTMLDivElement, CustomCalendarProps>(function CustomInput({ value, onClick } , ref) {
+const CustomInput = forwardRef<HTMLDivElement, CustomCalendarProps>(function CustomInput(
+  { onClick, value },
+  ref,
+) {
   return (
     <div className={styles['custom-input']} onClick={onClick} ref={ref}>
       <span>
-        <IconFont iconName='icon-calendar' className={styles.calendar}/>
+        <IconFont className={styles.calendar} iconName='icon-calendar' />
       </span>
       {value}
     </div>
   )
 })
 
-export const Calendar = ({ setDate, readonly, onChange }: CalendarProps) => {
+export const Calendar = ({ onChange, readonly, setDate }: CalendarProps) => {
   const handleChange = (e: Date) => {
     onChange(e)
   }
@@ -35,22 +37,22 @@ export const Calendar = ({ setDate, readonly, onChange }: CalendarProps) => {
 
   return (
     <DatePicker
-      selected={setDate}
+      customInput={<CustomInput />}
       dateFormat='dd MMMM yyyy'
-      onChange={handleChange}
-      minDate={today}
       disabled={readonly}
       locale='ru'
-      customInput={<CustomInput />}
-      popperPlacement='bottom-start'
+      minDate={today}
+      onChange={handleChange}
       popperModifiers={[
         {
           name: 'offset',
           options: {
             offset: [-90, 10],
-          }
+          },
         },
       ]}
+      popperPlacement='bottom-start'
+      selected={setDate}
     />
   )
 }

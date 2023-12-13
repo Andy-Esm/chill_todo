@@ -1,8 +1,7 @@
 import { TaskType, setFilter } from '@entities/Tasks'
 import { useAppDispatch } from '@shared/lib/hooks/redux'
-import { TabsNavigation, TabProps } from '@shared/ui/TabsNavigation'
+import { TabProps, TabsNavigation } from '@shared/ui/TabsNavigation'
 import { ReactNode } from 'react'
-
 import styles from './TasksFilterTabs.module.scss'
 
 interface TabsItems extends TabProps {
@@ -13,27 +12,27 @@ const TabsItems: TabsItems[] = [
   {
     id: 0,
     text: 'Все',
-    type: TaskType.ALL
-  },  
+    type: TaskType.ALL,
+  },
   {
     id: 1,
     text: 'Текущие',
-    type: TaskType.CURRENT
+    type: TaskType.CURRENT,
   },
   {
     id: 2,
     text: 'Выполненные',
-    type: TaskType.COMPLETED
+    type: TaskType.COMPLETED,
   },
   {
     id: 3,
     text: 'Просроченные',
-    type: TaskType.OVERDUE
+    type: TaskType.OVERDUE,
   },
   {
     id: 4,
     text: 'Отложенные',
-    type: TaskType.DEFERRED
+    type: TaskType.DEFERRED,
   },
 ]
 
@@ -50,7 +49,7 @@ export const TasksFilterTabs = ({ renderSearch }: TasksFilterTabsProps) => {
 
   return (
     <div className={styles.actions}>
-      <TabsNavigation tabs={TabsItems} onClick={handleClick} />
+      <TabsNavigation onClick={handleClick} tabs={TabsItems} />
       {renderSearch}
     </div>
   )

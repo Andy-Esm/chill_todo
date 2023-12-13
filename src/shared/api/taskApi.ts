@@ -1,84 +1,84 @@
-import { rtkApi } from './rtkApi'
 import { ResponseTask, Task, TaskDTO, TaskWithId } from '@entities/Tasks'
+import { rtkApi } from './rtkApi'
 
 const taskApi = rtkApi.enhanceEndpoints({ addTagTypes: ['tasks'] }).injectEndpoints({
   endpoints: (build) => ({
-    getTasks: build.query<ResponseTask[], void>({
-      query: () => 'tasks',
-      providesTags: ['tasks'],
+    createSomeTasks: build.mutation<Task[], Omit<Task, 'id'>[]>({
+      invalidatesTags: ['tasks'],
+      query: (tasks) => ({
+        body: tasks,
+        method: 'POST',
+        url: 'tasks',
+      }),
     }),
 
     createTask: build.mutation<Task, Omit<TaskDTO, 'id'>>({
+      invalidatesTags: ['tasks'],
       query: (task) => ({
-        url: 'tasks/new-tasks',
-        method: 'POST',
         body: task,
-      }),
-      invalidatesTags: ['tasks'],
-    }),
-
-    createSomeTasks: build.mutation<Task[], Omit<Task, 'id'>[]>({
-      query: (tasks) => ({
-        url: 'tasks',
         method: 'POST',
-        body: tasks,
+        url: 'tasks/new-tasks',
       }),
-      invalidatesTags: ['tasks'],
-    }),
-
-    deleteTask: build.mutation<void, string>({
-      query: (id) => ({
-        url: `tasks/${id}`,
-        method: 'DELETE',
-      }),
-      invalidatesTags: ['tasks'],
     }),
 
     deleteSomeTasks: build.mutation<void, TaskWithId[]>({
+      invalidatesTags: ['tasks'],
       query: (tasks) => ({
-        url: 'tasks',
-        method: 'DELETE',
         body: tasks,
+        method: 'DELETE',
+        url: 'tasks',
       }),
-      invalidatesTags: ['tasks'],
     }),
 
-    updateTask: build.mutation<Task, TaskDTO>({
-      query: (DTO) => ({
-        url: `tasks/${DTO.task.id}`,
-        method: 'PUT',
-        body: DTO,
-      }),
+    deleteTask: build.mutation<void, string>({
       invalidatesTags: ['tasks'],
+      query: (id) => ({
+        method: 'DELETE',
+        url: `tasks/${id}`,
+      }),
     }),
 
-    updateTaskStatus: build.mutation<Task, Task>({
-      query: (task) => ({
-        url: `tasks/${task.id}`,
-        method: 'PATCH',
-        body: task,
-      }),
-      invalidatesTags: ['tasks'],
+    getTasks: build.query<ResponseTask[], void>({
+      providesTags: ['tasks'],
+      query: () => 'tasks',
     }),
 
     updateSomeTasks: build.mutation<Task[], Task[]>({
-      query: (tasks) => ({
-        url: 'tasks',
-        method: 'PUT',
-        body: tasks,
-      }),
       invalidatesTags: ['tasks'],
+      query: (tasks) => ({
+        body: tasks,
+        method: 'PUT',
+        url: 'tasks',
+      }),
+    }),
+
+    updateTask: build.mutation<Task, TaskDTO>({
+      invalidatesTags: ['tasks'],
+      query: (DTO) => ({
+        body: DTO,
+        method: 'PUT',
+        url: `tasks/${DTO.task.id}`,
+      }),
+    }),
+
+    updateTaskStatus: build.mutation<Task, Task>({
+      invalidatesTags: ['tasks'],
+      query: (task) => ({
+        body: task,
+        method: 'PATCH',
+        url: `tasks/${task.id}`,
+      }),
     }),
   }),
 })
 
 export const {
+  useCreateSomeTasksMutation,
+  useCreateTaskMutation,
+  useDeleteSomeTasksMutation,
   useDeleteTaskMutation,
   useGetTasksQuery,
-  useUpdateTaskMutation,
-  useCreateTaskMutation,
-  useCreateSomeTasksMutation,
-  useDeleteSomeTasksMutation,
   useUpdateSomeTasksMutation,
+  useUpdateTaskMutation,
   useUpdateTaskStatusMutation,
 } = taskApi

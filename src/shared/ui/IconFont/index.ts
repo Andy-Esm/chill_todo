@@ -1,1 +1,1 @@
-export { IconFont, IconName, IconProps, IconColor } from './IconFont'
+export { IconColor, IconFont, IconName, IconProps } from './IconFont'

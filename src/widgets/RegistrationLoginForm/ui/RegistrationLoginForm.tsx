@@ -1,10 +1,10 @@
-import { memo, useState } from 'react'
-import classNames from 'classnames'
-import style from './RegistrationLoginForm.module.scss'
+import { LoginForm } from '@features/LoginForm'
+import { RegistrationForm } from '@features/RegistrationForm'
 import { Button } from '@shared/ui/Button'
 import { Popup } from '@shared/ui/Popup'
-import { RegistrationForm } from '@features/RegistrationForm'
-import { LoginForm } from '@features/LoginForm'
+import classNames from 'classnames'
+import { memo, useState } from 'react'
+import style from './RegistrationLoginForm.module.scss'
 
 export const RegistrationLoginForm = memo(() => {
   const [isActive, setIsActive] = useState(false)
@@ -27,24 +27,18 @@ export const RegistrationLoginForm = memo(() => {
 
   return (
     <div className={classNames(style['registration-login-form'])}>
-      <Button
-        style='primary'
-        uppercase
-        bold
-        filled onClick={openCloseModal(true)}>Войти</Button>
-      <Button
-        style='primary'
-        uppercase
-        bold
-        onClick={openCloseModal(true, true)}>Регистрация</Button>
-      <Popup
-        isActive={isActive}
-        onClose={openCloseModal(false)}
-        centered
-      >
+      <Button bold filled onClick={openCloseModal(true)} style='primary' uppercase>
+        Войти
+      </Button>
+      <Button bold onClick={openCloseModal(true, true)} style='primary' uppercase>
+        Регистрация
+      </Button>
+      <Popup centered isActive={isActive} onClose={openCloseModal(false)}>
         {!isRegistrationForm && <LoginForm onSuccess={onSuccessLogin} />}
         {isRegistrationForm && <RegistrationForm onSuccess={onSuccessRegistration} />}
       </Popup>
     </div>
   )
 })
+
+RegistrationLoginForm.displayName = 'RegistrationLoginForm'

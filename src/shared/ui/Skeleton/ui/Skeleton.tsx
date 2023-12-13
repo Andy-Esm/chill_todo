@@ -1,20 +1,18 @@
-import styles from './Skeleton.module.scss'
 import classNames from 'classnames'
+import styles from './Skeleton.module.scss'
 
 interface ISkeletonProps {
-	className?: string;
-  width?: string
+  className?: string
   height?: string
   radius?: string
+  width?: string
 }
-export const Skeleton = ({className, width, height, radius}: ISkeletonProps) => {
-
+export const Skeleton = ({ className, height, radius, width }: ISkeletonProps) => {
   const style = {
-    width,
+    borderRadius: radius,
     height,
-    borderRadius: radius
+    width,
   }
 
-  return (
-    <div className={classNames(styles.skeleton, className)} style={style}></div>)
+  return <div className={classNames(styles.skeleton, className)} style={style}></div>
 }

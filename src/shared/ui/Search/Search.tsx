@@ -1,18 +1,16 @@
-import { useEffect, useState } from 'react'
-import classNames from 'classnames'
-
 import { useDebounce } from '@shared/lib/hooks/debounceSearch'
 import { IconFont } from '@shared/ui/IconFont'
-
+import classNames from 'classnames'
+import { useEffect, useState } from 'react'
 import styles from './Search.module.scss'
 
 interface ISearchProps {
   delay: number
-  placeholder?: string
   onChange?: (value: string) => void
+  placeholder?: string
 }
 
-export const Search = ({ delay, placeholder, onChange }: ISearchProps) => {
+export const Search = ({ delay, onChange, placeholder }: ISearchProps) => {
   const [value, setValue] = useState('')
   const [isActive, setIsActive] = useState(false)
 
@@ -44,20 +42,17 @@ export const Search = ({ delay, placeholder, onChange }: ISearchProps) => {
 
   return (
     <div className={setActiveClass()}>
-      <div className={styles['search-icon']} onClick={handleIsActive} >
-        <IconFont iconName='icon-search' color='primary' />
+      <div className={styles['search-icon']} onClick={handleIsActive}>
+        <IconFont color='primary' iconName='icon-search' />
       </div>
       <div className={styles['search-input']}>
-        <input
-          type='text'
-          placeholder={placeholder}
-          value={value}
-          onInput={handleChange}
-        />
+        <input onInput={handleChange} placeholder={placeholder} type='text' value={value} />
       </div>
-      {value && <div className={styles['clean-icon']} onClick={cleanValue} >
-        <IconFont iconName='icon-close' color='default' />
-      </div>}
+      {value && (
+        <div className={styles['clean-icon']} onClick={cleanValue}>
+          <IconFont color='default' iconName='icon-close' />
+        </div>
+      )}
     </div>
   )
 }

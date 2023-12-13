@@ -6,39 +6,48 @@ export const useSubtasks = (task: Task | undefined) => {
   const [subTasks, setSubtasks] = useState<SubTask[]>(task?.tasks || [])
   const [removedSubTasks, setRemovedSubtasks] = useState<string[]>([])
 
-  const addSubtask = useCallback((title: string | undefined) => {
-    if (!title) return
-    if (title) {
-      const subtask: SubTask = {
-        startDate: moment(task?.startDate) ?? moment(),
-        title,
-        isSubtask: true,
-        type: TaskType.CURRENT,
-      }
-      setSubtasks([...subTasks, subtask])
-    }
-  },[subTasks])
-
-  const changeSubtaskStatus = useCallback((task: SubTask ) => {
-    const updatedSubtasks = subTasks.map(subTask => {
-      if (subTask === task) {
-        return {
-          ...subTask,
-          type: subTask.type === TaskType.COMPLETED ? TaskType.CURRENT : TaskType.COMPLETED
+  const addSubtask = useCallback(
+    (title: string | undefined) => {
+      if (!title) return
+      if (title) {
+        const subtask: SubTask = {
+          isSubtask: true,
+          startDate: moment(task?.startDate) ?? moment(),
+          title,
+          type: TaskType.CURRENT,
         }
+        setSubtasks([...subTasks, subtask])
       }
-      return subTask
-    })
-    setSubtasks(updatedSubtasks)
-  },[subTasks])
+    },
+    [subTasks],
+  )
 
-  const deleteSubtask = useCallback((task: SubTask) => {
-    const updatedSubtasks = subTasks.filter(item => task.title !== item.title )
-    setSubtasks(updatedSubtasks)
-    if (task.id) {
-      setRemovedSubtasks(prevState => prevState.concat(task.id as string))
-    }
-  }, [subTasks])
+  const changeSubtaskStatus = useCallback(
+    (task: SubTask) => {
+      const updatedSubtasks = subTasks.map((subTask) => {
+        if (subTask === task) {
+          return {
+            ...subTask,
+            type: subTask.type === TaskType.COMPLETED ? TaskType.CURRENT : TaskType.COMPLETED,
+          }
+        }
+        return subTask
+      })
+      setSubtasks(updatedSubtasks)
+    },
+    [subTasks],
+  )
 
-  return { subTasks, removedSubTasks, addSubtask, changeSubtaskStatus, deleteSubtask,  }
+  const deleteSubtask = useCallback(
+    (task: SubTask) => {
+      const updatedSubtasks = subTasks.filter((item) => task.title !== item.title)
+      setSubtasks(updatedSubtasks)
+      if (task.id) {
+        setRemovedSubtasks((prevState) => prevState.concat(task.id as string))
+      }
+    },
+    [subTasks],
+  )
+
+  return { addSubtask, changeSubtaskStatus, deleteSubtask, removedSubTasks, subTasks }
 }

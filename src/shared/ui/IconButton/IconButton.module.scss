@@ -1,14 +1,10 @@
 .icon-btn {
   cursor: pointer;
-
   display: grid;
   place-items: center;
-
   font-size: 0.5em;
-
   background: transparent;
   border: none;
-
   transition: background-color 0.3s ease, transform 0.3s ease;
 
   &:active {

@@ -1,7 +1,7 @@
-import { useUpdateNotificationsMutation } from './../api/updateNotifications'
 import { Notification } from '@entities/Notification'
 import { useEffect, useState } from 'react'
 import { ListOnItemsRenderedProps } from 'react-window'
+import { useUpdateNotificationsMutation } from './../api/updateNotifications'
 
 export const useSetReadNotifications = (data?: Notification[]) => {
   const [isOpen, setIsOpen] = useState<boolean>()

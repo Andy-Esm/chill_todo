@@ -1,20 +1,20 @@
+import { TaskReducer } from '@entities/Tasks'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { rtkApi } from '@shared/api'
 import { UiReducer } from '@shared/lib/store'
-import { TaskReducer } from '@entities/Tasks'
-
 
 const rootReducer = combineReducers({
-  ui: UiReducer,
-  tasks: TaskReducer,
   [rtkApi.reducerPath]: rtkApi.reducer,
+  tasks: TaskReducer,
+  ui: UiReducer,
 })
 
 const store = configureStore({
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(rtkApi.middleware),
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-    serializableCheck: false,
-  }).concat(rtkApi.middleware)
 })
 
 export default store

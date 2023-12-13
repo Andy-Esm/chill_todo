@@ -2,13 +2,12 @@ import { Meta, StoryObj } from '@storybook/react'
 import { Icon } from './Icon'
 import '@app/styles/index.scss'
 
-
 const meta: Meta<typeof Icon> = {
-  title: 'ui/Icon',
   component: Icon,
+  title: 'ui/Icon',
 }
 export default meta
-type Story = StoryObj<typeof Icon>;
+type Story = StoryObj<typeof Icon>
 
 export const Normal: Story = {}
-Normal.args = {height: 24, width: 24, color: 'success', name: 'CloseIcon'}
+Normal.args = { color: 'success', height: 24, name: 'CloseIcon', width: 24 }

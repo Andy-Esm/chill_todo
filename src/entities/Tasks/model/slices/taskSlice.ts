@@ -1,8 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { TaskType } from '../types/Task'
 
 export interface TasksState {
-  currentFilter: TaskType;
+  currentFilter: TaskType
 }
 
 const initialState: TasksState = {
@@ -10,8 +10,8 @@ const initialState: TasksState = {
 }
 
 const taskSlice = createSlice({
-  name: 'task',
   initialState,
+  name: 'task',
   reducers: {
     setFilter: (state, action: PayloadAction<TaskType>) => {
       state.currentFilter = action.payload

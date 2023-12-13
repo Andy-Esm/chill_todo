@@ -1,35 +1,24 @@
 import classNames from 'classnames'
+import { IconName, icons } from './model/const/icons'
 import styles from './Icon.module.scss'
-import {IconName, icons} from './model/const/icons'
 
-export type ColorType = 'warn' | 'error' | 'primary' |'success' | 'white' | 'default' | 'text'
+export type ColorType = 'default' | 'error' | 'primary' | 'success' | 'text' | 'warn' | 'white'
 
 export interface IconProps {
-  name: IconName
   className?: string
   color?: ColorType
-  width?: string | number
-  height?: string | number
+  height?: number | string
+  name: IconName
+  width?: number | string
 }
 
-
-
-export const Icon = ({ name, className, color, width, height}: IconProps) => {
+export const Icon = ({ className, color, height, name, width }: IconProps) => {
   const IconComponent = icons[name]
   if (!IconComponent) {
     return null
   }
   const colorStyle = color && styles[color]
-  const iconAllStyles = classNames(
-    colorStyle,
-    className
-  )
+  const iconAllStyles = classNames(colorStyle, className)
 
-  return (
-    <IconComponent
-      className={iconAllStyles}
-      width={width}
-      height={height}
-    />
-  )
+  return <IconComponent className={iconAllStyles} height={height} width={width} />
 }

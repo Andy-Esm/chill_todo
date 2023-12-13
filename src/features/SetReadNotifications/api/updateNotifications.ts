@@ -11,12 +11,12 @@ export const updateNotificationsApi = rtkApi
         void,
         { notifications: Notification[]; updateFields: UpdatedFields }
       >({
-        query: (item) => ({
-          url: 'notifications',
-          method: 'PATCH',
-          body: item,
-        }),
         invalidatesTags: ['notifications'],
+        query: (item) => ({
+          body: item,
+          method: 'PATCH',
+          url: 'notifications',
+        }),
       }),
     }),
   })

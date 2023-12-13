@@ -1,17 +1,16 @@
-import { Login } from '../model/types/login'
 import { rtkApi } from '@shared/api'
+import { Login } from '../model/types/login'
 
 export const loginApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
     loginByEmail: build.mutation<void, Login>({
       query: (user) => ({
-        url: '/login',
+        body: user,
         method: 'Post',
-        body: user
-      })
-    })
-  })
+        url: '/login',
+      }),
+    }),
+  }),
 })
 
 export const { useLoginByEmailMutation } = loginApi
-

@@ -1,1 +1,1 @@
-export {TeamsPageLazy as TeamsPage} from './ui/TeamsPage/TeamsPageLazy'
+export { TeamsPageLazy as TeamsPage } from './ui/TeamsPage/TeamsPageLazy'

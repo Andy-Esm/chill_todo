@@ -1,26 +1,29 @@
-import { memo } from 'react'
-import classNames from 'classnames'
-import styles from './LoginForm.module.scss'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Title } from '@shared/ui/Title'
-import { CustomInput } from '@shared/ui/CustomInput'
-import { Checkbox } from '@shared/ui/Checkbox'
 import { Button } from '@shared/ui/Button'
-import { useForm } from 'react-hook-form'
-import { Login } from '../model/types/login'
-import { LoginSchema } from '../model/types/LoginSchema'
-import { useLoginByEmailMutation } from '../api/loginApi'
+import { Checkbox } from '@shared/ui/Checkbox'
+import { CustomInput } from '@shared/ui/CustomInput'
 import { FieldError } from '@shared/ui/FieldError'
+import { Title } from '@shared/ui/Title'
+import classNames from 'classnames'
+import { memo } from 'react'
+import { useForm } from 'react-hook-form'
+import { useLoginByEmailMutation } from '../api/loginApi'
+import { LoginSchema } from '../model/types/LoginSchema'
+import { Login } from '../model/types/login'
+import styles from './LoginForm.module.scss'
 
 interface LoginFormProps {
   onSuccess: () => void
 }
 
 export const LoginForm = memo(({ onSuccess }: LoginFormProps) => {
-
-  const {register, formState: {errors, isValid}, handleSubmit} = useForm<Login>({
+  const {
+    formState: { errors, isValid },
+    handleSubmit,
+    register,
+  } = useForm<Login>({
+    mode: 'onChange',
     resolver: yupResolver(LoginSchema),
-    mode: 'onChange'
   })
 
   const [loginByEmail] = useLoginByEmailMutation()
@@ -39,26 +42,45 @@ export const LoginForm = memo(({ onSuccess }: LoginFormProps) => {
       <div className={styles.header}>
         <Title center>Вход</Title>
         <div className={styles.field}>
-          <CustomInput id='2' name='email' type='text' label='E-mail*:' register={register('email')} className={emailError ? classNames(styles.invalid) : ''} />
+          <CustomInput
+            className={emailError ? classNames(styles.invalid) : ''}
+            id='2'
+            label='E-mail*:'
+            name='email'
+            register={register('email')}
+            type='text'
+          />
           <FieldError>{emailError}</FieldError>
         </div>
         <div className={styles.field}>
-          <CustomInput id='3' name='password' type='password' label='Пароль*:' register={register('password')} className={passwordError ? classNames(styles.invalid) : ''}/>
+          <CustomInput
+            className={passwordError ? classNames(styles.invalid) : ''}
+            id='3'
+            label='Пароль*:'
+            name='password'
+            register={register('password')}
+            type='password'
+          />
           <FieldError>{passwordError}</FieldError>
         </div>
         <div className={styles.col2}>
-          <Checkbox text='Запомнить меня' className={styles.checkbox} {...register('stayOn')} crossout={false}/>
-          <a href="#">забыли пароль?</a>
+          <Checkbox
+            className={styles.checkbox}
+            text='Запомнить меня'
+            {...register('stayOn')}
+            crossout={false}
+          />
+          <a href='#'>забыли пароль?</a>
         </div>
       </div>
       <div className={styles.footer}>
         <Button
-          type='submit'
-          style={isValid ? 'primary': 'disabled'}
-          filled
-          size='full'
-          onClick={handleSubmit(onSubmit)}
           disabled={!isValid}
+          filled
+          onClick={handleSubmit(onSubmit)}
+          size='full'
+          style={isValid ? 'primary' : 'disabled'}
+          type='submit'
         >
           <Title tag='h2'>Войти</Title>
         </Button>
@@ -66,3 +88,5 @@ export const LoginForm = memo(({ onSuccess }: LoginFormProps) => {
     </form>
   )
 })
+
+LoginForm.displayName = 'LoginForm'

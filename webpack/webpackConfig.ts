@@ -1,50 +1,50 @@
 import path from 'path'
 import webpack from 'webpack'
-import type {Configuration as DevServerConfiguration} from 'webpack-dev-server'
-import {webpackRules} from './webpackRules'
-import {webpackOptimization} from './webpackOptimization'
-import {IWebpackOptions} from './webpackTypes'
-import {webpackPlugins} from './webpackPlugins'
+import type { Configuration as DevServerConfiguration } from 'webpack-dev-server'
+import { webpackOptimization } from './webpackOptimization'
+import { webpackPlugins } from './webpackPlugins'
+import { webpackRules } from './webpackRules'
+import { IWebpackOptions } from './webpackTypes'
 
-export function webpackConfig(options: IWebpackOptions): webpack.Configuration & DevServerConfiguration{
-
-  const {isDev, mode, paths} = options
+export function webpackConfig(
+  options: IWebpackOptions,
+): webpack.Configuration & DevServerConfiguration {
+  const { isDev, mode, paths } = options
   const basePath = paths.base
   const devServer = {
-    open: true,
     historyApiFallback: true,
     hot: true,
+    open: true,
   }
   return {
-    mode: mode,
-    entry: paths.entry,
+    devServer: isDev ? devServer : undefined,
+    devtool: isDev ? 'eval-source-map' : undefined,
 
-    output: {
-      path: paths.build,
-      filename: 'bundle.[contenthash].js',
-      clean: true
-    },
+    entry: paths.entry,
+    mode: mode,
     module: {
-      rules: webpackRules(options)
+      rules: webpackRules(options),
     },
+    optimization: webpackOptimization(),
+    output: {
+      clean: true,
+      filename: 'bundle.[contenthash].js',
+      path: paths.build,
+    },
+    plugins: webpackPlugins(options),
     resolve: {
-      extensions: ['.ts', '.tsx', '...'],
       alias: {
         '@app': path.resolve(basePath, 'app'),
-        '@pages': path.resolve(basePath, 'pages'),
-        '@widgets': path.resolve(basePath, 'widgets'),
-        '@features': path.resolve(basePath, 'features'),
         '@entities': path.resolve(basePath, 'entities'),
+        '@features': path.resolve(basePath, 'features'),
+        '@icons': path.resolve(basePath, 'shared/assets/icons'),
+        '@images': path.resolve(basePath, 'shared/assets/images'),
+        '@pages': path.resolve(basePath, 'pages'),
         '@shared': path.resolve(basePath, 'shared'),
         '@types': path.resolve(basePath, 'types'),
-        '@icons': path.resolve(basePath, 'shared/assets/icons'),
-        '@images': path.resolve(basePath, 'shared/assets/images')
+        '@widgets': path.resolve(basePath, 'widgets'),
       },
+      extensions: ['.ts', '.tsx', '...'],
     },
-    devtool: isDev ? 'eval-source-map' : undefined,
-    devServer: isDev ? devServer : undefined,
-    plugins: webpackPlugins(options),
-    optimization: webpackOptimization()
-
   }
 }

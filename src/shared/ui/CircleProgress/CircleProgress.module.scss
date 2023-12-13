@@ -1,7 +1,6 @@
 .progress {
   &-wrapper {
     position: relative;
-
     width: 100%;
     max-width: 100px;
     height: 100%;
@@ -16,10 +15,8 @@
   &-inner-circle {
     transform-origin: center;
     transform: rotate(-90deg);
-
     stroke: hsl(var(--accent-warn-hs) var(--lt-500));
     stroke-linecap: round;
-
     transition: 0.5s linear;
   }
 

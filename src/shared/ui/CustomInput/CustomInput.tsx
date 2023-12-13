@@ -1,23 +1,24 @@
-import {  UseFormRegisterReturn } from 'react-hook-form'
-import styles from './CustomInput.module.scss'
 import classNames from 'classnames'
+import { UseFormRegisterReturn } from 'react-hook-form'
+import styles from './CustomInput.module.scss'
 
-type InputType = 'text' | 'email' | 'password' | 'number';
+type InputType = 'email' | 'number' | 'password' | 'text'
 
 interface InputProps {
-  name?: string
   className?: string
-  type: InputType;
   id?: string
-  label?: string;
+  label?: string
+  name?: string
   register?: UseFormRegisterReturn<string>
+  type: InputType
 }
 
-export const CustomInput = ({ type, label, register, id, className, name}: InputProps) => {
-
+export const CustomInput = ({ className, id, label, name, register, type }: InputProps) => {
   return (
     <>
-      <label htmlFor={id} className={styles.label}>{label}</label>
+      <label className={styles.label} htmlFor={id}>
+        {label}
+      </label>
       <input
         className={classNames(styles.input, className)}
         name={name}
@@ -27,4 +28,3 @@ export const CustomInput = ({ type, label, register, id, className, name}: Input
     </>
   )
 }
-

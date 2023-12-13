@@ -1,41 +1,50 @@
-import { ForwardedRef, ReactNode, forwardRef, ChangeEvent } from 'react'
-import styles from './Checkbox.module.scss'
 import classNames from 'classnames'
+import { ChangeEvent, ForwardedRef, ReactNode, forwardRef } from 'react'
 import { FieldValues, Path } from 'react-hook-form'
+import styles from './Checkbox.module.scss'
 interface CheckboxProps<T extends FieldValues> {
-  name: Path<T>
-  text: string | ReactNode,
-  disabled?: boolean,
+  checked?: boolean
+  className?: string
   crossout?: boolean
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void,
-  className?: string,
-  value?: string,
-  checked?:boolean
+  disabled?: boolean
+  name: Path<T>
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+  text: ReactNode | string
+  value?: string
 }
 
 export const Checkbox = forwardRef(function Checkbox<T extends FieldValues>(
   props: CheckboxProps<T>,
-  ref: ForwardedRef<HTMLInputElement>) {
-  const { text, disabled = false, onChange, className, name, value, crossout = true, checked } = props
+  ref: ForwardedRef<HTMLInputElement>,
+) {
+  const {
+    checked,
+    className,
+    crossout = true,
+    disabled = false,
+    name,
+    onChange,
+    text,
+    value,
+  } = props
 
   const customCheckboxStyles = classNames(styles['custom-checkbox'], {
+    [styles.crossout]: crossout,
     [styles.disabled]: disabled,
-    [styles.crossout]: crossout
   })
-
 
   return (
     <label className={classNames(styles.label, className)}>
       <input
-        id={name}
-        type='checkbox'
+        checked={checked}
         className={classNames(styles.checkbox)}
         disabled={disabled}
+        id={name}
         name={name}
-        onChange={(e)=> onChange?.(e)}
+        onChange={(e) => onChange?.(e)}
         ref={ref}
+        type='checkbox'
         value={value}
-        checked={checked}
       />
       <span className={customCheckboxStyles}>{text}</span>
     </label>

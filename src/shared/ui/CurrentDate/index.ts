@@ -1,1 +1,1 @@
-export {CurrentDate} from './CurrentDate'
+export { CurrentDate } from './CurrentDate'

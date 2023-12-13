@@ -5,12 +5,12 @@ export const registerApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
     register: build.mutation<void, User>({
       query: (user) => ({
-        url: '/register',
+        body: user,
         method: 'Post',
-        body: user
-      })
-    })
-  })
+        url: '/register',
+      }),
+    }),
+  }),
 })
 
 export const { useRegisterMutation } = registerApi

@@ -1,32 +1,36 @@
 import { ReactNode, memo, useCallback } from 'react'
-import { AddTaskCard } from '../AddTaskCard/AddTaskCard'
 import { ResponseTask } from '../../model/types/Task'
+import { AddTaskCard } from '../AddTaskCard/AddTaskCard'
+import { TaskCardSkeleton } from '../TaskCard/TaskCardSkeleton/TaskCardSkeleton'
 import styles from './TaskCardsList.module.scss'
-import {TaskCardSkeleton} from '../TaskCard/TaskCardSkeleton/TaskCardSkeleton'
 
 interface TaskCardsListProps {
-  tasks?: ResponseTask[]
   addTask?: () => void
-  renderTask: (item: ResponseTask) => ReactNode
   isLoading: boolean
+  renderTask: (item: ResponseTask) => ReactNode
+  tasks?: ResponseTask[]
 }
 
-export const TaskCardsList = memo(({tasks, renderTask, addTask, isLoading}: TaskCardsListProps) => {
+export const TaskCardsList = memo(
+  ({ addTask, isLoading, renderTask, tasks }: TaskCardsListProps) => {
+    const handlerAddTaskClick = useCallback(() => {
+      addTask?.()
+    }, [])
 
-  const handlerAddTaskClick = useCallback(() => {
-    addTask?.()
-  }, [])
+    return (
+      <div className={styles['tasks-wrapper']}>
+        {isLoading && (
+          <>
+            <TaskCardSkeleton />
+            <TaskCardSkeleton />
+            <TaskCardSkeleton />
+          </>
+        )}
+        {tasks && tasks.map(renderTask)}
+        <AddTaskCard onClick={handlerAddTaskClick} />
+      </div>
+    )
+  },
+)
 
-  return (
-    <div className={styles['tasks-wrapper']}>
-      {isLoading &&
-        <>
-          <TaskCardSkeleton/>
-          <TaskCardSkeleton/>
-          <TaskCardSkeleton/>
-        </>
-      }
-      {tasks && tasks.map(renderTask)}
-      <AddTaskCard onClick={handlerAddTaskClick} />
-    </div>)
-})
+TaskCardsList.displayName = 'TaskCardsList'

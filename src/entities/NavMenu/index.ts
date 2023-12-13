@@ -1,1 +1,1 @@
-export {NavMenuList} from './ui/NavMenuList/NavMenuList'
+export { NavMenuList } from './ui/NavMenuList/NavMenuList'

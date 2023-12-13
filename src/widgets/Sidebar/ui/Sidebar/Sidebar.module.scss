@@ -3,10 +3,8 @@
   grid-area: sidebar;
   flex-direction: column;
   gap: var(--gap-xxl);
-
   min-height: 100vh;
   padding: var(--gap-xxl) var(--gap-main);
-
   background: var(--clr-bg-sidebar);
   box-shadow: var(--shadow-sidebar)
 
@@ -29,9 +27,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   padding: 1rem 0 0;
-
   border-top: 1px solid hsl(var(--neutral-grey-hs) var(--lt-200));
 }
 

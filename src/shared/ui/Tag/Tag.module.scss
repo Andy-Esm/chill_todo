@@ -1,13 +1,10 @@
 .tag {
   cursor: pointer;
-
   padding: 6px;
-
   font-family: var(--ff-main);
   font-size: 12px;
   font-weight: var(--fw-semibold);
   font-style: italic;
-
   border-radius: 4px;
 
   &-red {

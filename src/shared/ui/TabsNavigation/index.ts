@@ -1,1 +1,1 @@
-export { TabsNavigation, type TabProps } from './TabsNavigation'
+export { type TabProps, TabsNavigation } from './TabsNavigation'

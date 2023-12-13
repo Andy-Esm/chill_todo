@@ -8,23 +8,23 @@ const createNotificationApi = rtkApi
   .enhanceEndpoints({ addTagTypes: ['tasks', 'notifications'] })
   .injectEndpoints({
     endpoints: (build) => ({
-      updateTaskList: build.mutation<string[], { taskIds: string[]; updateFields: UpdatedFields }>({
-        query: (body) => ({
-          url: 'tasks',
-          method: 'PATCH',
-          body: body,
-        }),
-        invalidatesTags: ['tasks'],
-        extraOptions: { delay: 0 },
-      }),
       createNotification: build.mutation<Notification[], Notification[]>({
-        query: (notifications) => ({
-          url: 'notifications',
-          method: 'Post',
-          body: notifications,
-        }),
-        invalidatesTags: ['notifications'],
         extraOptions: { delay: 0 },
+        invalidatesTags: ['notifications'],
+        query: (notifications) => ({
+          body: notifications,
+          method: 'Post',
+          url: 'notifications',
+        }),
+      }),
+      updateTaskList: build.mutation<string[], { taskIds: string[]; updateFields: UpdatedFields }>({
+        extraOptions: { delay: 0 },
+        invalidatesTags: ['tasks'],
+        query: (body) => ({
+          body: body,
+          method: 'PATCH',
+          url: 'tasks',
+        }),
       }),
     }),
   })
