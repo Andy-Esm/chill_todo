@@ -3,4 +3,8 @@
   grid-area: content;
   gap: 20px;
   padding: var(--gap-main) var(--gap-xxl);
+
+  h2 {
+    cursor: default;
+  }
 }
