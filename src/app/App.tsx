@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks/redux'
 import { UiActions } from '@shared/lib/store/UiSlice'
 import { CurrentDate } from '@shared/ui/CurrentDate'
+import { Grid } from '@shared/ui/Grid'
 import { Popup } from '@shared/ui/Popup'
 import { Content } from '@widgets/Content'
 import { Header } from '@widgets/Header'
@@ -18,18 +19,18 @@ export const App = () => {
     dispatch(UiActions.closePopup())
   }
   return (
-    <div className={styles.app}>
+    <Grid className={styles.bg} columns={'257px 1fr'} gap={0}>
       <Sidebar />
-      <Header>
-        <NotificationButton />
-        <CurrentDate />
-      </Header>
       <Content>
+        <Header>
+          <NotificationButton />
+          <CurrentDate />
+        </Header>
         <AppRouter />
       </Content>
       <Popup animation fullHeight isActive={isActive} onClose={onPopupClose}>
         {children}
       </Popup>
-    </div>
+    </Grid>
   )
 }
