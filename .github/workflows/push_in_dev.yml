@@ -10,7 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install deps
-        run: npm ci
+        run: npm install
       - name: Lint code
         run: npm run lint:code
       - name: Lint styles
