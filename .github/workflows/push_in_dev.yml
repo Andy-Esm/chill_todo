@@ -1,6 +1,6 @@
 name: Chek
 on:
-  push:
+  merge:
     branches:
       - dev
 jobs:
