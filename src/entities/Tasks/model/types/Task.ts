@@ -13,8 +13,8 @@ export interface Task {
   isSubtask?: boolean
   startDate: Moment
   tagsIds?: string[]
-  taskId?: string
-  tasks?: ResponseTask[]
+  taskId?: string //id родительской
+  tasks?: ResponseTask[] //массив подзадач
   text?: string
   title: string
   type: TaskType
