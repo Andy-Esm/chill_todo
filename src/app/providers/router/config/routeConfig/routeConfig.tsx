@@ -1,16 +1,16 @@
 import { CalendarPage } from '@pages/CalendarPage'
 import { HomePage } from '@pages/HomePage'
+import { NotesPage } from '@pages/NotesPage'
 import { PageNotFound } from '@pages/PageNotFound'
 import { ProjectsPage } from '@pages/ProjectsPage'
 import { TasksPage } from '@pages/TasksPage'
-import { TeamsPage } from '@pages/TeamsPage'
 import { RouteProps } from 'react-router-dom'
 
 export enum AppRoutes {
   CALENDAR = 'calendar',
   HOME = 'home',
-  KANBAN = 'kanban',
   NOT_FOUND = 'not_found',
+  NOTES = 'notes',
   PROJECTS = 'projects',
   TASK = 'task',
 }
@@ -18,8 +18,8 @@ export enum AppRoutes {
 export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.CALENDAR]: '/calendar',
   [AppRoutes.HOME]: '/',
-  [AppRoutes.KANBAN]: '/teams',
   [AppRoutes.NOT_FOUND]: '*',
+  [AppRoutes.NOTES]: '/notes',
   [AppRoutes.PROJECTS]: '/projects',
   [AppRoutes.TASK]: '/tasks',
 }
@@ -33,13 +33,13 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     element: <HomePage />,
     path: RoutePath.home,
   },
-  [AppRoutes.KANBAN]: {
-    element: <TeamsPage />,
-    path: RoutePath.kanban,
-  },
   [AppRoutes.NOT_FOUND]: {
     element: <PageNotFound />,
     path: RoutePath.not_found,
+  },
+  [AppRoutes.NOTES]: {
+    element: <NotesPage />,
+    path: RoutePath.notes,
   },
   [AppRoutes.PROJECTS]: {
     element: <ProjectsPage />,
