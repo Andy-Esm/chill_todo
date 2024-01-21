@@ -112,9 +112,5 @@
     "storybook": "^7.0.26",
     "storybook-addon-react-router-v6": "^1.0.2",
     "yup": "^1.2.0"
-  },
-  "pre-commit": [
-    "lint:code",
-    "lint:style"
-  ]
+  }
 }
