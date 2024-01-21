@@ -14,4 +14,4 @@ jobs:
       - name: Lint code
         run: npm run lint:code
       - name: Lint styles
-        run: npm run lint:styles
+        run: npm run lint:style
