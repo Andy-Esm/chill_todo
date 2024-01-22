@@ -16,10 +16,6 @@
 }
 
 .logo{
-  cursor: pointer;
-  font-family: var(--ff-heading);
-  font-size: var(--fs-xxl);
-  font-weight: var(--fw-semibold);
   text-align: center;
 }
 
@@ -32,10 +28,6 @@
 }
 
 .sidebar-title{
-  cursor: default;
-  font-family: var(--ff-main);
-  font-size: var(--fs-main);
-  font-weight: var(--fw-semibold);
   color: var(--clr-accent-text);
   text-transform: uppercase;
 }

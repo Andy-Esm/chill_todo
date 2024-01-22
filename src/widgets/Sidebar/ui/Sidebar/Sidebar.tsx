@@ -24,17 +24,17 @@ export const Sidebar = () => {
   const tasks = data?.slice(0, 4)
   return (
     <aside className={styles.sidebar}>
-      <h2 className={styles.logo}>Chill ToDo</h2>
+      <Title className={styles.logo}>Chill ToDo</Title>
       <NavMenuList />
       <div className={styles['title-wrapper']}>
-        <Title className={styles['sidebar-title']} tag='h4'>
+        <Title className={styles['sidebar-title']} fontFamily='main' tag='h4'>
           Проекты
         </Title>
         <IconButton form='rounded' iconName='icon-plus' size='small' style='text' />
       </div>
       <ProjectsMenuList />
       <div className={styles['title-wrapper']}>
-        <Title className={styles['sidebar-title']} tag='h4'>
+        <Title className={styles['sidebar-title']} fontFamily='main' tag='h4'>
           Задачи
         </Title>
         <IconButton
