@@ -131,7 +131,7 @@ export const EditTaskForm = memo(({ task }: EditTaskFormProps) => {
             placementPanel='bottom-start'
             renderButton={() => (
               <div>
-                <Title className={styles.tagstitle} fontFamily='main' tag='h3'>
+                <Title className={styles.tagstitle} fontFamily='main' tag='h4'>
                   Теги
                 </Title>
               </div>
@@ -147,7 +147,7 @@ export const EditTaskForm = memo(({ task }: EditTaskFormProps) => {
           {taskTags && <TagList onClick={deleteTag} tagList={getTags(taskTags)} />}
         </div>
         <div>
-          <Title className={styles.subtitle} fontFamily='main' tag='h3'>
+          <Title className={styles.subtitle} fontFamily='main' tag='h4'>
             Подзадачи
           </Title>
           <CustomInput

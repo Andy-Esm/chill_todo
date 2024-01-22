@@ -1,12 +1,11 @@
-.tasks-page{
+.tasks-page {
   width: 100%;
   min-height: 100ch;
 }
 
-.title{
+.title {
   padding-block-end: var(--gap-xxxl);
   font-family: var(--ff-heading);
-  font-size: var(--fs-xxl);
   font-weight: var(--fw-regular);
   color: var(--clr-accent-text);
 }
