@@ -1,4 +1,10 @@
+import { Title } from '@shared/ui/Title'
+
 const HomePage = () => {
-  return <h2> Home Page</h2>
+  return (
+    <Title fontFamily='main' tag='h3'>
+      Home Page
+    </Title>
+  )
 }
 export default HomePage

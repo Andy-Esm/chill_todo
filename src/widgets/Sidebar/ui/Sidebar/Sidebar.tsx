@@ -6,6 +6,7 @@ import { useGetTasksQuery } from '@shared/api'
 import { useAppDispatch } from '@shared/lib/hooks/redux'
 import { UiActions } from '@shared/lib/store/UiSlice'
 import { IconButton } from '@shared/ui/IconButton'
+import { Title } from '@shared/ui/Title'
 import { RegistrationLoginForm } from '@widgets/RegistrationLoginForm'
 import { useNavigate } from 'react-router-dom'
 import { MenuSkeleton } from '../MenuSkeleton/MenuSkeleton'
@@ -26,12 +27,16 @@ export const Sidebar = () => {
       <h2 className={styles.logo}>Chill ToDo</h2>
       <NavMenuList />
       <div className={styles['title-wrapper']}>
-        <h2 className={styles['sidebar-title']}>Проекты</h2>
+        <Title className={styles['sidebar-title']} tag='h4'>
+          Проекты
+        </Title>
         <IconButton form='rounded' iconName='icon-plus' size='small' style='text' />
       </div>
       <ProjectsMenuList />
       <div className={styles['title-wrapper']}>
-        <h2 className={styles['sidebar-title']}>Задачи</h2>
+        <Title className={styles['sidebar-title']} tag='h4'>
+          Задачи
+        </Title>
         <IconButton
           form='rounded'
           iconName='icon-plus'
