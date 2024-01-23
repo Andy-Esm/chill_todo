@@ -1,6 +1,5 @@
 .sidebar {
   display: flex;
-  grid-area: sidebar;
   flex-direction: column;
   gap: var(--gap-xxl);
   min-height: 100vh;
@@ -17,9 +16,6 @@
 }
 
 .logo{
-  font-family: var(--ff-heading);
-  font-size: var(--fs-xxl);
-  font-weight: var(--fw-semibold);
   text-align: center;
 }
 
@@ -32,9 +28,6 @@
 }
 
 .sidebar-title{
-  font-family: var(--ff-main);
-  font-size: var(--fs-main);
-  font-weight: var(--fw-semibold);
   color: var(--clr-accent-text);
   text-transform: uppercase;
 }

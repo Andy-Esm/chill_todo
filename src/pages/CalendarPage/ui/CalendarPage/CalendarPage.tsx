@@ -1,5 +1,11 @@
+import { Title } from '@shared/ui/Title'
+
 const CalendarPage = () => {
-  return <h2>Calendar Page</h2>
+  return (
+    <Title fontFamily='main' tag='h3'>
+      Calendar Page
+    </Title>
+  )
 }
 
 export default CalendarPage
