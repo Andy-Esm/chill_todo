@@ -1,3 +1,3 @@
 export interface TokenState {
-  token: string | null;
+  token: null | string
 }

@@ -1,26 +1,28 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { TokenState } from './StoreTokenSchema';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { TokenState } from './StoreTokenSchema'
 
 const initialState: TokenState = {
-  token: localStorage.getItem('token') ?? null
-};
+  token: document.cookie.includes('token=')
+    ? document.cookie.replace(/(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/, '$1')
+    : null,
+}
 
 const tokenSlice = createSlice({
-  name: 'token',
   initialState,
+  name: 'token',
   reducers: {
-    setToken: (state, action: PayloadAction<string>) => {
-      state.token = action.payload;
-      const expires = new Date();
-      expires.setDate(expires.getDate() + 7);
-      document.cookie = `token=${action.payload}; expires=${expires.toUTCString()};`;
-    },
     clearToken: () => {
-      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;'
+    },
+    setToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload
+      const expires = new Date()
+      expires.setDate(expires.getDate() + 7)
+      document.cookie = `token=${action.payload}; expires=${expires.toUTCString()};`
     },
   },
-});
+})
 
-export const { setToken, clearToken } = tokenSlice.actions
+export const { clearToken, setToken } = tokenSlice.actions
 
-export default tokenSlice.reducer;
+export default tokenSlice.reducer

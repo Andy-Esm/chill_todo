@@ -1,7 +1,5 @@
-import store from '@app/providers/store/store'
 import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
-import { useAppSelector } from '@shared/lib/hooks/redux'
 
 interface ExtraOptionsWithDelay {
   delay?: number
@@ -24,7 +22,7 @@ export const baseQueryWithDelay: BaseQueryFn<
 
   const requestConfig = {
     ...extraOptions,
-    headers: headers
+    headers: headers,
   }
 
   return new Promise((resolve) => {

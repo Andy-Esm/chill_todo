@@ -1,13 +1,13 @@
 import { TaskReducer } from '@entities/Tasks'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { rtkApi } from '@shared/api'
-import { UiReducer, tokenReducer,  } from '@shared/lib/store'
+import { UiReducer, tokenReducer } from '@shared/lib/store'
 
 const rootReducer = combineReducers({
   [rtkApi.reducerPath]: rtkApi.reducer,
   tasks: TaskReducer,
-  ui: UiReducer,
   token: tokenReducer,
+  ui: UiReducer,
 })
 
 const store = configureStore({
