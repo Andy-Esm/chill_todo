@@ -11,6 +11,8 @@ import { useLoginByEmailMutation } from '../api/loginApi'
 import { LoginSchema } from '../model/types/LoginSchema'
 import { Login } from '../model/types/login'
 import styles from './LoginForm.module.scss'
+import { useAppDispatch } from '@shared/lib/hooks/redux'
+import { setToken } from '@shared/lib/store/tokenSlice'
 
 interface LoginFormProps {
   onSuccess: () => void
@@ -28,9 +30,23 @@ export const LoginForm = memo(({ onSuccess }: LoginFormProps) => {
 
   const [loginByEmail] = useLoginByEmailMutation()
 
-  const onSubmit = (data: Login) => {
-    loginByEmail(data)
-    alert('Отправка данных формы входа')
+  const dispatch = useAppDispatch()
+  const onSubmit = async (data: Login) => {
+    try {
+      const result: any = await loginByEmail(data)
+      if ('data' in result) {
+        const token = result?.data?.token;
+        if (token) {
+          dispatch(setToken(token));
+        }
+        console.log(result.data);
+      } else {
+        console.log(result.error);
+      }
+    } catch (error) {
+      console.log(error)
+    }
+    // alert('Отправка данных формы входа')
     onSuccess()
   }
 

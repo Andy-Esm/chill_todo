@@ -1,5 +1,5 @@
-import { rtkApi } from '@shared/api'
-import { Login } from '../model/types/login'
+import { rtkApi } from '@shared/api';
+import { Login } from '../model/types/login';
 
 export const loginApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
@@ -7,10 +7,10 @@ export const loginApi = rtkApi.injectEndpoints({
       query: (user) => ({
         body: user,
         method: 'Post',
-        url: '/login',
+        url: '/users/login',
       }),
     }),
   }),
-})
+});
 
-export const { useLoginByEmailMutation } = loginApi
+export const { useLoginByEmailMutation } = loginApi;

@@ -37,11 +37,12 @@ export const RegistrationForm = memo(({ onSuccess }: RegistrationFormProps) => {
     resolver: yupResolver(RegisterSchema),
   })
 
-  const onSubmit = (data: UserRegister) => {
+  const onSubmit = async (data: UserRegister) => {
     //eslint-disable-next-line
     const { confirmPassword, ...user } = data
-    registerUser(user)
-    alert('Отправка данных формы регистрации')
+    const result = await registerUser(user)
+    // alert('Отправка данных формы регистрации')
+    console.log(result)
     onSuccess()
   }
 
