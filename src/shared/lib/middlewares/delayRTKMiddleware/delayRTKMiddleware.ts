@@ -6,26 +6,33 @@ interface ExtraOptionsWithDelay {
 }
 
 const url = process.env.BASE_URL_API
-const baseQuery = fetchBaseQuery({ baseUrl: url })
+const parsingCookie = (name: string) => {
+  const cookies = document.cookie
+  const arrCookies = cookies.split('; ')
+  const authCookie = arrCookies.find((el) => el.includes(name))
+  if (authCookie) {
+    return authCookie.split('=')[1]
+  } else {
+    return ''
+  }
+}
+const token = parsingCookie('token')
+
+const baseQuery = fetchBaseQuery({
+  baseUrl: `${url}`,
+  prepareHeaders: (headers) => {
+    headers.set('authorization', `Bearer ${token ?? ''}`)
+    return headers
+  },
+})
 
 export const baseQueryWithDelay: BaseQueryFn<
-  FetchArgs | string,
+  string | FetchArgs,
   unknown,
   FetchBaseQueryError,
   ExtraOptionsWithDelay
 > = async (args, api, extraOptions) => {
-  // const token = store.getState().token;
-  const headers = {
-    'Content-Type': 'application/json',
-    // 'Authorization': `Bearer ${token}`
-  }
-
-  const requestConfig = {
-    ...extraOptions,
-    headers: headers,
-  }
-
   return new Promise((resolve) => {
-    setTimeout(async () => resolve(await baseQuery(args, api, requestConfig)), 0)
+    setTimeout(async () => resolve(await baseQuery(args, api, extraOptions)), 0)
   })
 }

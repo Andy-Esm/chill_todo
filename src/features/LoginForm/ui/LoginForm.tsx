@@ -50,7 +50,6 @@ export const LoginForm = memo(({ onSuccess }: LoginFormProps) => {
     } catch (error) {
       console.log(error)
     }
-    // alert('Отправка данных формы входа')
     onSuccess()
   }
 

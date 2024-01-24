@@ -17,7 +17,7 @@ const tokenSlice = createSlice({
     setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload
       const expires = new Date()
-      expires.setDate(expires.getDate() + 7)
+      expires.setHours(expires.getHours() + 1) 
       document.cookie = `token=${action.payload}; expires=${expires.toUTCString()};`
     },
   },
