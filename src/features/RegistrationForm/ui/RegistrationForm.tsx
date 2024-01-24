@@ -8,7 +8,6 @@ import { Title } from '@shared/ui/Title'
 import classNames from 'classnames'
 import { memo } from 'react'
 import { useForm } from 'react-hook-form'
-import { useRegisterMutation } from '../api/registerApi'
 import { RegisterSchema } from '../model/types/RegisterSchema'
 import styles from './RegistrationForm.module.scss'
 interface RegistrationFormProps {
@@ -25,8 +24,6 @@ export const RegistrationForm = memo(({ onSuccess }: RegistrationFormProps) => {
       Я согласен на <a href='#'>обработку персональных данных</a>
     </span>
   )
-
-  const [registerUser] = useRegisterMutation()
 
   const {
     formState: { errors, isValid },

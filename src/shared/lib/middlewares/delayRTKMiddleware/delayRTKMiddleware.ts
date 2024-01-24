@@ -27,7 +27,7 @@ const baseQuery = fetchBaseQuery({
 })
 
 export const baseQueryWithDelay: BaseQueryFn<
-  string | FetchArgs,
+  FetchArgs | string,
   unknown,
   FetchBaseQueryError,
   ExtraOptionsWithDelay
