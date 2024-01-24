@@ -40,7 +40,6 @@ export const RegistrationForm = memo(({ onSuccess }: RegistrationFormProps) => {
   const onSubmit = async (data: UserRegister) => {
     //eslint-disable-next-line
     const { confirmPassword, ...user } = data
-    const result = await registerUser(user)
     onSuccess()
   }
 
