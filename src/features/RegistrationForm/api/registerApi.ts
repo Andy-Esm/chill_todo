@@ -7,7 +7,7 @@ export const registerApi = rtkApi.injectEndpoints({
       query: (user) => ({
         body: user,
         method: 'Post',
-        url: '/register',
+        url: '/users/register',
       }),
     }),
   }),

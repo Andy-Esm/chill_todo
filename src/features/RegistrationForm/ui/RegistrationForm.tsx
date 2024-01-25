@@ -41,7 +41,6 @@ export const RegistrationForm = memo(({ onSuccess }: RegistrationFormProps) => {
     //eslint-disable-next-line
     const { confirmPassword, ...user } = data
     registerUser(user)
-    alert('Отправка данных формы регистрации')
     onSuccess()
   }
 

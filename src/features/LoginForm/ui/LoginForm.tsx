@@ -1,4 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useAppDispatch } from '@shared/lib/hooks/redux'
+import { setToken } from '@shared/lib/store/tokenSlice'
 import { Button } from '@shared/ui/Button'
 import { Checkbox } from '@shared/ui/Checkbox'
 import { CustomInput } from '@shared/ui/CustomInput'
@@ -16,6 +18,11 @@ interface LoginFormProps {
   onSuccess: () => void
 }
 
+type MutationResult = {
+  data?: { token: null | string } | undefined
+  error?: null | string
+}
+
 export const LoginForm = memo(({ onSuccess }: LoginFormProps) => {
   const {
     formState: { errors, isValid },
@@ -28,9 +35,17 @@ export const LoginForm = memo(({ onSuccess }: LoginFormProps) => {
 
   const [loginByEmail] = useLoginByEmailMutation()
 
-  const onSubmit = (data: Login) => {
-    loginByEmail(data)
-    alert('Отправка данных формы входа')
+  const dispatch = useAppDispatch()
+  const onSubmit = async (data: Login) => {
+    try {
+      const result = (await loginByEmail(data)) as MutationResult
+      if ('data' in result) {
+        const token = result?.data?.token
+        token && dispatch(setToken(token))
+      }
+    } catch (error) {
+      console.log(error)
+    }
     onSuccess()
   }
 

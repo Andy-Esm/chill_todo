@@ -7,7 +7,7 @@ export const loginApi = rtkApi.injectEndpoints({
       query: (user) => ({
         body: user,
         method: 'Post',
-        url: '/login',
+        url: '/users/login',
       }),
     }),
   }),
