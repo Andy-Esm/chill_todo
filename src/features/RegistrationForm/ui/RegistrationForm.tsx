@@ -8,6 +8,7 @@ import { Title } from '@shared/ui/Title'
 import classNames from 'classnames'
 import { memo } from 'react'
 import { useForm } from 'react-hook-form'
+import { useRegisterMutation } from '../api/registerApi'
 import { RegisterSchema } from '../model/types/RegisterSchema'
 import styles from './RegistrationForm.module.scss'
 interface RegistrationFormProps {
@@ -25,6 +26,8 @@ export const RegistrationForm = memo(({ onSuccess }: RegistrationFormProps) => {
     </span>
   )
 
+  const [registerUser] = useRegisterMutation()
+
   const {
     formState: { errors, isValid },
     handleSubmit,
@@ -34,9 +37,11 @@ export const RegistrationForm = memo(({ onSuccess }: RegistrationFormProps) => {
     resolver: yupResolver(RegisterSchema),
   })
 
-  const onSubmit = async (data: UserRegister) => {
+  const onSubmit = (data: UserRegister) => {
     //eslint-disable-next-line
     const { confirmPassword, ...user } = data
+    registerUser(user)
+    alert('Отправка данных формы регистрации')
     onSuccess()
   }
 

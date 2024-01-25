@@ -41,7 +41,7 @@ export const LoginForm = memo(({ onSuccess }: LoginFormProps) => {
       const result = (await loginByEmail(data)) as MutationResult
       if ('data' in result) {
         const token = result?.data?.token
-        token ? dispatch(setToken(token)) : console.log(result.error)
+        token && dispatch(setToken(token))
       }
     } catch (error) {
       console.log(error)
