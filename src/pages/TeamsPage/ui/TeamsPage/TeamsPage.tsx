@@ -1,11 +1,10 @@
 import { Title } from '@shared/ui/Title'
 
-const CalendarPage = () => {
+const TeamsPage = () => {
   return (
     <Title fontFamily='main' tag='h3'>
-      Calendar Page
+      Teams Page
     </Title>
   )
 }
-
-export default CalendarPage
+export default TeamsPage
