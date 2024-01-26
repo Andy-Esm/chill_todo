@@ -10,6 +10,11 @@ interface RemainingTimeProps {
 const getRemainingString = (daysLeft: number) => {
   const lastTwo = parseInt(daysLeft.toString().slice(-2))
   const lastOne = parseInt(daysLeft.toString().slice(-1))
+
+  if (daysLeft === 0) {
+    return 'Срок истек'
+  }
+
   switch (true) {
     case daysLeft < 0:
       return 'Срок истек'
@@ -25,7 +30,10 @@ const getRemainingString = (daysLeft: number) => {
 
 export const RemainingTime = ({ className, date }: RemainingTimeProps) => {
   const remainingDays = date.diff(moment(), 'days')
-  const remainingClass = classNames(styles['remaining-time'], className)
+  const remainingZero = remainingDays <= 0
+  const remainingClass = classNames(styles['remaining-time'], className, {
+    [styles['remaining-time-limit']]: remainingZero,
+  })
 
   return <span className={remainingClass}>{getRemainingString(remainingDays)}</span>
 }

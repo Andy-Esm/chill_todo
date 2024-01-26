@@ -3,3 +3,10 @@
   font-size: 16px;
   color: hsl(var(--accent-text-hs) var(--lt-500));
 }
+
+.remaining-time-limit {
+  padding: var(--gap-xs);
+  color: var(--clr-accent-white);
+  background-color: hsl(var(--accent-danger-hs) var(--lt-200));
+  border-radius: var(--gap-xs);
+}
