@@ -11,6 +11,12 @@ const notesApi = rtkApi.injectEndpoints({
       }),
     }),
 
+    deleteNote: build.mutation<void, string>({
+      query: (id) => ({
+        method: 'DELETE',
+        url: `tasks/${id}`,
+      }),
+    }),
     getNotes: build.query<Notes[], void>({
       query: () => ({
         method: 'GET',
@@ -20,4 +26,4 @@ const notesApi = rtkApi.injectEndpoints({
   }),
 })
 
-export const { useCreateNoteMutation, useGetNotesQuery } = notesApi
+export const { useCreateNoteMutation, useDeleteNoteMutation, useGetNotesQuery } = notesApi
