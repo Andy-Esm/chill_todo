@@ -14,7 +14,7 @@ const notesApi = rtkApi.injectEndpoints({
     deleteNote: build.mutation<void, string>({
       query: (id) => ({
         method: 'DELETE',
-        url: `tasks/${id}`,
+        url: `notes/${id}`,
       }),
     }),
     getNotes: build.query<Notes[], void>({
