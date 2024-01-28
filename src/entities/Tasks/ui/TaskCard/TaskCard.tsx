@@ -1,5 +1,6 @@
 import { ResponseTask } from '@entities/Tasks'
 import { TaskType } from '@entities/Tasks'
+import { Panel } from '@shared/ui/Panel'
 import { ProgressBar } from '@shared/ui/ProgressBar'
 import { RemainingTime } from '@shared/ui/RemainingTime'
 import classNames from 'classnames'
@@ -28,7 +29,7 @@ export const TaskCard = ({ onClick, renderActions, renderTags, task }: TaskCardP
     subTasks?.reduce((res, task) => (task.type === TaskType.COMPLETED ? res + 1 : res), 0)
 
   return (
-    <div className={styles['task-card']} onClick={handlerTaskCardClick}>
+    <Panel className={styles['task-card']} onClick={handlerTaskCardClick} pointer withShadow>
       {renderActions?.(task)}
       <div className={classNames(styles['task-info'], subTasks && styles['task-info-progress'])}>
         <div className={styles['task-text']}>{title}</div>
@@ -47,6 +48,6 @@ export const TaskCard = ({ onClick, renderActions, renderTags, task }: TaskCardP
           <RemainingTime date={momentDueDate} />
         </div>
       </div>
-    </div>
+    </Panel>
   )
 }
