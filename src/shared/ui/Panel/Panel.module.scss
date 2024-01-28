@@ -6,6 +6,7 @@
   padding: var(--gap-md) var(--gap-main) var(--gap-main);
   background-color: var(--clr-accent-white);
   border-radius: var(--radius-main);
+  transition: box-shadow 0.3ms ease-in-out;
 
   &:hover {
     box-shadow: var(--shadow-hover);
