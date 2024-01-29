@@ -25,6 +25,7 @@ npm start
 ### Стек технологий
 
 - react: 18.2.0
+- redux/redux-toolkit: 8.1.1
 - typescript: 5.0.4
 - sass: 1.62.1
 - webpack: 5.85.0
