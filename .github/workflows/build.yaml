@@ -34,7 +34,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install deps
         run: npm install
+      - name: Create .env.production
+        run: echo "BASE_URL_API=${BASE_URL_API}" > ${{ github.workspace }}/.env.production
       - name: Build
         run: npm run build
-      - name: Save dist
-        run: mv dist ${{ github.workspace }}/dist
