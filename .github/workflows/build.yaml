@@ -2,7 +2,7 @@ name: Build Application
 on:
   pull_request:
     branches:
-      - dev
+      - main
 
 jobs:
   lint:
@@ -38,22 +38,3 @@ jobs:
         run: npm run build
       - name: Save dist
         run: mv dist ${{ github.workspace }}/dist
-
-  deploy:
-    needs: [build]
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20.x]
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Deploy on server
-        env:
-          SSH_PRIVATE: ${{ secrets.SSH_PRIVATE }}
-          run: |
-            mkdir -p ~/.ssh
-            echo "$SSH_PRIVATE" >> ~/.ssh/id_rsa
-            chmod 600 ~/.ssh/id_rsa
