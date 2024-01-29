@@ -36,11 +36,24 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
-      - name: Copy dist to main branch
-        run: |
-          git checkout main
-          git pull origin main
-          cp -r dist/* .
-          git add .
-          git commit -m "Update dist from dev branch"
-          git push origin main
+      - name: Save dist
+        run: mv dist ${{ github.workspace }}/dist
+
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Deploy on server
+        env:
+          SSH_PRIVATE: ${{ secrets.SSH_PRIVATE }}
+          run: |
+            mkdir -p ~/.ssh
+            echo "$SSH_PRIVATE" >> ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
