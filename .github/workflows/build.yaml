@@ -1,0 +1,40 @@
+name: Build Application
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install deps
+        run: npm install
+      - name: Lint code
+        run: npm run lint:code:fix
+      - name: Lint styles
+        run: npm run lint:style:fix
+  build:
+    needs: [lint]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install deps
+        run: npm install
+      - name: Create .env.production
+        run: echo "BASE_URL_API=${BASE_URL_API}" > ${{ github.workspace }}/.env.production
+      - name: Build
+        run: npm run build

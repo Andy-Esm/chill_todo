@@ -1,0 +1,89 @@
+
+.btn {
+  cursor: pointer;
+  font-family: var(--ff-main);
+  font-size: var(--fs-main);
+  background-color: transparent;
+  border: 1px solid var(--clr-nav-main);
+  border-radius: 10px;
+  outline: none;
+
+  &.uppercase {
+    text-transform: uppercase;
+  }
+
+  &.bold {
+    font-weight: bold;
+  }
+
+  &:hover,
+  &.filled {
+    color: var(--clr-accent-white);
+  }
+
+  &-disabled {
+    background-color: hsl(var(--accent-text-hs) var(--lt-200));
+    border-color: hsl(var(--neutral-grey-hs) var(--lt-700));
+  }
+
+  &.filled:hover {
+    background-color: hsl(var(--navigation-hs) var(--lt-400));
+  }
+
+  &-primary {
+    color: var(--clr-nav-main);
+    border-color: var(--clr-nav-main);
+
+    &:hover,
+    &.filled {
+      background-color: var(--clr-nav-main);
+    }
+  }
+
+  &-outline {
+    color: var(--clr-accent-text);
+    border: none;
+
+    &:hover,
+    &.filled {
+      color: var(--clr-accent-text);
+      background-color: none;
+    }
+  }
+
+  &-accept {
+    color: var(--clr-accent-success);
+    border-color: var(--clr-accent-success);
+
+    &:hover,
+    &.filled {
+      background-color: var(--clr-accent-success);
+    }
+  }
+
+  &-cancel {
+    color: var(--clr-accent-danger);
+    border-color: var(--clr-accent-danger);
+
+    &:hover,
+    &.filled {
+      background-color: var(--clr-accent-danger);
+    }
+  }
+
+  &-small {
+    width: 160px;
+    height: 34px;
+  }
+
+  &-medium {
+    width: 218px;
+    height: 50px;
+  }
+
+  &-full {
+    width: 100%;
+    height: 69px;
+    text-transform: uppercase;
+  }
+}

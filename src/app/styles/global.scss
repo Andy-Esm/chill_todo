@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&family=Oswald:wght@300;400;500;600&display=swap');
+
+*:focus-visible{
+  border: none;
+  outline: 3px solid hsl(var(--accent-text-hs) var(--lt-400));
+}
+
+body {
+  font-family: var(--ff-main);
+  font-size: var(--fs-main);
+  line-height: 1.5;
+}
+
+svg {
+  width: 100%;
+}
+
+a {
+  color: var(--clr-nav-main);
+}
+

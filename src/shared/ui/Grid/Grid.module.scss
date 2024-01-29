@@ -1,0 +1,10 @@
+.component {
+  display: grid;
+  grid-auto-flow: var(--auto-flow);
+  grid-column: var(--grid-col);
+  grid-row: var(--grid-row);
+  grid-template-columns: var(--col-template);
+  gap: var(--gap);
+  place-content: var(--align-content) var(--justify-content);
+  place-items: var(--align-items) var(--justify-items);
+}

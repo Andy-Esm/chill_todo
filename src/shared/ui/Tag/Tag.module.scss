@@ -1,0 +1,33 @@
+.tag {
+  cursor: pointer;
+  padding: 6px;
+  font-family: var(--ff-main);
+  font-size: 12px;
+  font-weight: var(--fw-semibold);
+  font-style: italic;
+  border-radius: 4px;
+
+  &-red {
+    color: var(--clr-accent-danger);
+    background-color: rgb(255 121 121 / 10%);
+  }
+
+  &-yellow {
+    color: var(--clr-accent-warn);
+    background-color: rgb(254 215 3 / 10%);
+  }
+
+  &-green {
+    color: var(--clr-accent-success);
+    background-color: rgb(63 151 41 / 10%);
+  }
+
+  &-blue {
+    color: var(--clr-nav-main);
+    background-color: rgb(73 204 249 / 10%);
+  }
+}
+
+.transparent {
+  background-color: transparent;
+}

@@ -1,0 +1,22 @@
+.remove-icon {
+  margin:  2px;
+  margin-left: auto;
+  font-size: 24px;
+  outline: none;
+}
+
+.subtask {
+  --border-color: hsl(var(--navigation-hs) var(--lt-200));
+
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+
+  &:hover  {
+    box-shadow: inset 2px 0 var(--border-color), inset -2px 0 var(--border-color);
+  }
+}
+
+.checkbox {
+  color: #BDBDD1;
+}

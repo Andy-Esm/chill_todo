@@ -1,0 +1,76 @@
+:root{
+  /* Hue Saturation */
+  --neutral-grey-hs: 0 0%;
+  --navigation-hs: 204 72%;
+  --accent-text-hs: 240 18%;
+  --accent-success-hs: 108 57%;
+  --accent-warn-hs: 54 100%;
+  --accent-danger-hs: 357 100%;
+
+
+  /* Lightness */
+  --lt-100: 96%;
+  --lt-200: 78%;
+  --lt-300: 75%;
+  --lt-400: 64%;
+  --lt-500: 52%;
+  --lt-600: 42%;
+  --lt-700: 34%;
+  --lt-800: 29%;
+  --lt-900: 22%;
+
+  /* Accent colors */
+  --clr-accent-grey: hsl(var(--neutral-grey-hs) var(--lt-500));
+  --clr-accent-text: hsl(var(--accent-text-hs) var(--lt-500));
+  --clr-accent-success: hsl(var(--accent-success-hs) var(--lt-500));
+  --clr-accent-warn: hsl(var(--accent-warn-hs) var(--lt-500));
+  --clr-accent-danger: hsl(var(--accent-danger-hs) var(--lt-500));
+  --clr-accent-white: #FFF;
+
+  /* gradients */
+  --clr-bg-sidebar:  linear-gradient(180deg, #DEFDFF 0%, #FDE1FA 53.65%, #FDF0C4 100%);
+  --clr-bg-card: linear-gradient(180deg, #FFF 0%, #FFF 100%);
+
+  /* Text colors */
+  --clr-card-heading: #1C1D22;
+  --clr-nav-main: hsl(var(--navigation-hs) var(--lt-500));
+  --clr-nav-secondary: var(--clr-accent-grey);
+
+
+  /* font-family */
+  --ff-main:  'Nunito Sans', sans-serif;
+  --ff-heading: 'Oswald', sans-serif;
+
+  /* font-weight */
+  --fw-semibold: 600;
+  --fw-regular: 400;
+  --fw-light: 300;
+
+  /* font-size */
+  --fs-xxl: 38px;
+  --fs-xl: 32px;
+  --fs-lg: 24px;
+  --fs-md: 18px;
+  --fs-sm: 14px;
+  --fs-main: 16px;
+
+  /* Shadows */
+  --shadow-box-main: 0px 4px 12px 1px rgb(34 139 207 / 25%);
+  --shadow-inner-main:  inset -4px -4px 4px rgb(34 139 207 / 14%), inset 4px 4px 4px rgb(34 139 207 / 15%);
+  --shadow-sidebar:  0px 4px 12px 1px rgb(108 73 172 / 25%);
+  --shadow-hover: 0 4px 12px 2px rgb(34 139 207 / 40%);
+
+  /* Spaces */
+  --gap-xs: 4px;
+  --gap-sm: 8px;
+  --gap-md: 12px;
+  --gap-main: 16px;
+  --gap-lg: 18px;
+  --gap-xl: 22px;
+  --gap-xxl: 34px;
+  --gap-xxxl: 40px;
+
+  /* Radius */
+  --circle: 50%;
+  --radius-main: 8px;
+}

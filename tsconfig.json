@@ -1,0 +1,32 @@
+{
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "target": "ES5",
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "paths": {
+      "@app/*": [ "app/*" ],
+      "@pages/*": [ "pages/*" ],
+      "@widgets/*": [ "widgets/*" ],
+      "@features/*": [ "features/*" ],
+      "@entities/*": [ "entities/*" ],
+      "@shared/*": [ "shared/*" ],
+      "@types/*": [ "types/*" ],
+      "@icons/*": [ "shared/assets/icons/*" ],
+      "@images/*": [ "shared/assets/images/*" ]
+    }
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
+}

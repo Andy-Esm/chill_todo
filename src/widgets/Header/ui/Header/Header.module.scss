@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--gap-main) var(--gap-xxl);
+}
+
+.wrapper{
+  display: flex;
+  gap: var(--gap-md);
+  align-items: center;
+  white-space: nowrap;
+}

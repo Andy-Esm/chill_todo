@@ -1,0 +1,42 @@
+.form {
+  display: grid;
+  align-items: start;
+  width: 550px;
+  height: 750px;
+  padding: 30px 44px 42px;
+  background: var(--clr-bg-sidebar);
+  border-radius: var(--radius-main);
+  box-shadow: var(--shadow-sidebar);
+}
+
+.col2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checkbox span {
+  color: var(--clr-card-heading);
+}
+
+.header {
+  display: grid;
+  gap: 30px;
+}
+
+.footer {
+  align-self: end;
+  margin-top: auto;
+  margin-bottom: 0;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.invalid{
+  background-color: hsl(var(--accent-danger-hs) var(--lt-100));
+  outline: 2px solid var(--clr-accent-danger);
+}

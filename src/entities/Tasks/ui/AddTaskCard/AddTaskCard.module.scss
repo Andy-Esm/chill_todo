@@ -1,0 +1,23 @@
+.add-task-card {
+  align-items: center;
+  justify-content: center;
+  height: 225px;
+  box-shadow: var(--shadow-inner-main);
+}
+
+.add-icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 10px;
+  background-color: var(--clr-nav-main);
+  border: 1px solid var(--clr-nav-main);
+  border-radius: 50%;
+  fill: #fff;
+}
+
+.add-icon {
+  font-size: 24px;
+}

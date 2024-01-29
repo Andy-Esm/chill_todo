@@ -1,0 +1,81 @@
+.edit-task-form {
+  overflow-y: auto;
+  display: grid;
+  align-items: start;
+  width: 560px;
+  height: 100%;
+  padding: 20px 16px 30px;
+  background-color: var(--clr-accent-white);
+  box-shadow: var(--shadow-sidebar);
+
+  &-content {
+    display: grid;
+    gap: var(--gap-xxl);
+  }
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &-actions {
+    display: flex;
+    gap: var(--gap-main);
+    align-self: flex-end;
+    justify-content: center;
+  }
+}
+
+.name {
+  margin-block-end: var(--gap-lg);
+}
+
+.subtask-input {
+  border: 1px solid var(--clr-accent-text);
+}
+
+.add-subtask {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: none;
+
+  &:hover {
+    background-color: none;
+  }
+}
+
+.settags {
+  display: flex;
+  gap: 8px;
+}
+
+.tagstitle {
+  cursor: pointer;
+}
+
+.taglist {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background-color: var(--clr-accent-white);
+  border-radius: var(--radius-main);
+  box-shadow: 0 4px 12px 1px rgb(34 139 207 / 25%);
+}
+
+.subtitle,
+.tagstitle {
+  margin-bottom: 10px;
+  color: hsl(var(--accent-text-hs) var(--lt-200));
+  text-transform: uppercase;
+}
+
+
+.arrow {
+  font-size: 16px;
+
+  &:hover {
+    font-size: 16px;
+  }
+}
