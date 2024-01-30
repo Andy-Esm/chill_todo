@@ -6,12 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install SSH
-        uses: shimataro/ssh-key-action@v2
+        uses: D3rHase/ssh-command-action@v0.2.2
         with:
-          key: ${{ secrets.SSH_PRIVATE }}
-      - name: Add known hosts
-        run: echo ${{ secrets.SSH_KNOWN_HOST }} >> ~/.ssh/known_hosts
-      - name: Checkout repo
-        run: echo "Done"
-      - name: Deploy with rsync
-        run: rsync -avz ./dist/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/chill_build
+          host: ${{ secrets.SSH_HOST }}
+          user: ${{ secrets.SSH_USERNAME }}
+          private_key: ${{ secrets.SSH_PRIVATE }}
+          command: rsync -avz ./dist/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/chill_build
