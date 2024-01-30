@@ -40,20 +40,20 @@ jobs:
         with:
           name: build-artifact
           path: dist
-  deploy:
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install SSH
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE }}
-      - name: Add known hosts
-        run: echo ${{ secrets.SSH_KNOWN_HOST }} >> ~/.ssh/known_hosts
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: build-artifact
-          path: dist
-      - name: Deploy with rsync
-        run: rsync -avz ./dist/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/chill_build
+  # deploy:
+  #   needs: [build]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Install SSH
+  #       uses: shimataro/ssh-key-action@v2
+  #       with:
+  #         key: ${{ secrets.SSH_PRIVATE }}
+  #     - name: Add known hosts
+  #       run: echo ${{ secrets.SSH_KNOWN_HOST }} >> ~/.ssh/known_hosts
+  #     - name: Download artifact
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: build-artifact
+  #         path: dist
+  #     - name: Deploy with rsync
+  #       run: rsync -avz ./dist/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/chill_build
