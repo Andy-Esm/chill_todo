@@ -44,13 +44,11 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
-      - name: Setup SSH
-        run: |
-          mkdir ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE }}"   > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          echo "${{ secrets.SSH_KNOWN_HOST }}" > ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
+      - run: mkdir ~/.ssh
+      - run: echo "${{ secrets.SSH_PRIVATE }}" >> ~/.ssh/id_rsa
+      - run: chmod 600 ~/.ssh/id_rsa
+      - run: echo "${{ secrets.SSH_KNOWN_HOST }}" >> ~/.ssh/known_hosts
+      - run: chmod 600 ~/.ssh/known_hosts
       - name: Use the artifact
         uses: actions/download-artifact@v2
         with:
