@@ -42,7 +42,7 @@ jobs:
           path: dist
   deploy:
     needs: [build]
-    runs-on: alpine-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Setup ssh
         run: |
