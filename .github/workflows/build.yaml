@@ -56,5 +56,4 @@ jobs:
           path: dist
 
       - name: rsync
-        if: github.event_name == 'workflow_dispatch'
-        run: rsync -a --delete dist/ root@31.129.104.180:/root/chill_build
+        run: rsync -a --delete dist/ ssh root@147.45.106.246:/andrey/home/chill_build
