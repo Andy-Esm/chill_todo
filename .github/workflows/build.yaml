@@ -18,7 +18,7 @@ jobs:
         run: npm run lint:code:fix
       - name: Lint styles
         run: npm run lint:style:fix
-  build_and_deploy:
+  build:
     needs: [lint]
     runs-on: ubuntu-latest
     strategy:
@@ -35,11 +35,23 @@ jobs:
         run: echo "BASE_URL_API=${BASE_URL_API}" > ${{ github.workspace }}/.env.production
       - name: Build
         run: npm run build
+      - name: Use the artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build-artifact
+          path: dist
+  deploy:
+    needs: [build]
+    runs-on: alpine-latest
+    steps:
       - name: Setup ssh
         run: |
           mkdir -p ~/.ssh
           chmod 600 ~/.ssh
           echo "${{ secrets.SSH_PRIVATE }}" >> ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -t rsa ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
       - name: rsync
+        if: github.event_name == 'workflow_dispatch'
         run: rsync -a --delete dist/ ${{secrets.SERVER_USER}}@${{secrets.SERVER_HOST}}:/root/chill_build
