@@ -35,8 +35,8 @@ jobs:
         run: echo "BASE_URL_API=${BASE_URL_API}" > ${{ github.workspace }}/.env.production
       - name: Build
         run: npm run build
-      - name: Use the artifact
-        uses: actions/download-artifact@v2
+      - name: Save dist as artifact
+        uses: actions/upload-artifact@v2
         with:
           name: build-artifact
           path: dist
@@ -52,6 +52,11 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -t rsa ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
+      - name: Use the artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build-artifact
+          path: dist
       - name: rsync
         if: github.event_name == 'workflow_dispatch'
         run: rsync -a --delete dist/ ${{secrets.SERVER_USER}}@${{secrets.SERVER_HOST}}:/root/chill_build
