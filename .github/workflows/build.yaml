@@ -45,16 +45,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.5.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE }}" | tr -d '\r' > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
+          ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
       - name: Use the artifact
         uses: actions/download-artifact@v2
         with:
           name: build-artifact
           path: dist
       - name: Add known hosts
-        run: echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+        run: echo "$SSH_KNOWN_HOST" > ~/.ssh/known_hosts
         env:
           SSH_KNOWN_HOST: ${{ secrets.SSH_KNOWN_HOST }}
       - name: rsync
