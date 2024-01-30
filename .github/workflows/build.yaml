@@ -45,24 +45,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE }}" | tr -d '\r' > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/id_rsa
-          ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
-
+        uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE }}
+      - name: Add known hosts
+        run: echo "$SSH_KNOWN_HOST" > ~/.ssh/known_hosts
+        env:
+          SSH_KNOWN_HOST: ${{ secrets.SSH_KNOWN_HOST }}
       - name: Use the artifact
         uses: actions/download-artifact@v2
         with:
           name: build-artifact
           path: dist
-      - name: Add known hosts
-        run: echo "$SSH_KNOWN_HOST" > ~/.ssh/known_hosts
-        env:
-          SSH_KNOWN_HOST: ${{ secrets.SSH_KNOWN_HOST }}
       - name: rsync
-        if: github.event_name == 'workflow_dispatch'
         run: rsync -a --delete dist/ root@31.129.104.180:/root/chill_build
