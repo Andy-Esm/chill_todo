@@ -1,8 +1,5 @@
 name: Build Application
-on:
-  pull_request:
-    branches:
-      - main
+on: workflow_dispatch
 
 jobs:
   lint:
@@ -38,3 +35,11 @@ jobs:
         run: echo "BASE_URL_API=${BASE_URL_API}" > ${{ github.workspace }}/.env.production
       - name: Build
         run: npm run build
+  deploy:
+    needs: [build]
+    runs-on: alpine-latest
+    steps:
+      - name: Install packages
+        run: apk update && apk add rsync openssh
+      - name: rsync
+        run: rsync -a --delete dist/ ${{secrets.SERVER_USER}}@${{secrets.SERVER_HOST}}:/root/chill_build
