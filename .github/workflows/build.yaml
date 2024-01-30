@@ -46,11 +46,11 @@ jobs:
     steps:
       - name: Setup ssh
         run: |
-          mkdir -p ~/.ssh
-          chmod 600 ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE }}" >> ~/.ssh/id_rsa
+          mkdir ~/.ssh
+          chmod 700 ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE }}" | cat > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -t rsa ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -t rsa ${{ secrets.SERVER_HOST }} | cat > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
       - name: Use the artifact
         uses: actions/download-artifact@v2
@@ -59,4 +59,4 @@ jobs:
           path: dist
       - name: rsync
         if: github.event_name == 'workflow_dispatch'
-        run: rsync -a --delete dist/ ${{secrets.SERVER_USER}}@${{secrets.SERVER_HOST}}:/root/chill_build
+        run: rsync -a --delete dist/ ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/root/chill_build
