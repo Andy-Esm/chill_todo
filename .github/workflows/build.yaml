@@ -35,5 +35,11 @@ jobs:
         run: echo "BASE_URL_API=${BASE_URL_API}" > ${{ github.workspace }}/.env.production
       - name: Build
         run: npm run build
+      - name: Setup ssh
+        run: |
+          mkdir -p ~/.ssh
+          chmod 600 ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE }}" >> ~/.ssh/id_rsa
+          ssh-keyscan -t rsa ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
       - name: rsync
         run: rsync -a --delete dist/ ${{secrets.SERVER_USER}}@${{secrets.SERVER_HOST}}:/root/chill_build
