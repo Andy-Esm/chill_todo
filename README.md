@@ -13,6 +13,8 @@
     - [Пишем хорошее сообщение коммита](#пишем-хорошее-сообщение-коммита)
   - [Оформление кода](#оформление-кода)
 
+[![Build Application](https://github.com/Andy-Esm/chill_todo/actions/workflows/build.yaml/badge.svg?branch=main)](https://github.com/Andy-Esm/chill_todo/actions/workflows/build.yaml)
+
 ## Установка / Начало работы
 
 ```shell
