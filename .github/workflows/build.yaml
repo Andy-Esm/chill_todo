@@ -46,7 +46,6 @@ jobs:
     steps:
       - name: Setup SSH
         run: |
-          apt-get install rsync openssh
           mkdir ~/.ssh
           echo "${{ secrets.SSH_PRIVATE }}"   > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
