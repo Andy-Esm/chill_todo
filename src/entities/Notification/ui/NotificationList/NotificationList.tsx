@@ -1,3 +1,4 @@
+import { Panel } from '@shared/ui/Panel'
 import { memo, useEffect, useRef } from 'react'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import {
@@ -53,7 +54,7 @@ export const NotificationList = memo(
 
     return (
       <>
-        <div className={styles.list}>
+        <Panel className={styles.list} withShadow>
           <div className={styles.hidden} ref={hiddenRowRef} style={{ width: currentWidth }}></div>
 
           {isLoading && <NotificationListSkeleton />}
@@ -85,7 +86,7 @@ export const NotificationList = memo(
               )}
             </AutoSizer>
           )}
-        </div>
+        </Panel>
       </>
     )
   },

@@ -1,0 +1,22 @@
+.component {
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--gap-md) var(--gap-main) var(--gap-main);
+  background-color: var(--clr-accent-white);
+  border-radius: var(--radius-main);
+  transition: box-shadow 0.3ms ease-in-out;
+
+  &:hover {
+    box-shadow: var(--shadow-hover);
+  }
+}
+
+.shadow {
+  box-shadow: var(--shadow-box-main);
+}
+
+.cursor {
+  cursor: pointer;
+}
