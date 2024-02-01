@@ -1,22 +1,35 @@
 import i18n from 'i18next'
-import { initReactI18next } from 'react-i18next'
 
-type MenuTranslation = Record<string, string>
+const languages = ['en', 'ru', 'de']
+const namespaces = ['auth', 'menu']
 
-i18n.use(initReactI18next).init({
-  fallbackLng: 'ru',
-  interpolation: {
-    escapeValue: false,
-  },
-  lng: 'ru',
-  resources: {
-    en: {
-      translation: require('../locales/en/translation.json') as MenuTranslation,
+const loadTranslations = async () => {
+  for (const lng of languages) {
+    for (const ns of namespaces) {
+      try {
+        const translations = await import(`../locales/${lng}/${ns}.json`)
+        i18n.addResourceBundle(lng, ns, translations.default)
+      } catch (error) {
+        console.error(`Ошибка при загрузке переводов ${lng}/${ns}:`, error)
+      }
+    }
+  }
+}
+
+i18n.init(
+  {
+    defaultNS: 'menu',
+    fallbackLng: 'ru',
+    initImmediate: false,
+    interpolation: {
+      escapeValue: false,
     },
-    ru: {
-      translation: require('../locales/ru/translation.json') as MenuTranslation,
-    },
+    lng: 'ru',
+    ns: namespaces,
   },
-})
+  async () => {
+    await loadTranslations()
+  },
+)
 
 export default i18n

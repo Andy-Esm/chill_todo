@@ -4,8 +4,9 @@ export const TranslationButton = () => {
   const { i18n } = useTranslation()
 
   const handleToggleTranslation = () => {
-    i18n.changeLanguage(i18n.language === 'en' ? 'ru' : 'en')
+    const nextLanguage = i18n.language === 'en' ? 'ru' : i18n.language === 'ru' ? 'de' : 'en'
+    i18n.changeLanguage(nextLanguage)
   }
 
-  return <button onClick={handleToggleTranslation}>EN/RU</button>
+  return <button onClick={handleToggleTranslation}>RU/DE/EN</button>
 }

@@ -1,0 +1,9 @@
+{
+    "menu": {
+        "home": "Heim",
+        "team": "Team",
+        "tasks": "Aufgaben",
+        "calendar": "Kalender",
+        "projects": "Projekte"
+    }
+}
