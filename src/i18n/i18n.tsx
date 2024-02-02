@@ -8,13 +8,12 @@ const loadTranslations = async () => {
   for (const lng of languages) {
     for (const ns of namespaces) {
       const cacheKey = `i18next_${lng}_${ns}`
-
       try {
         const cachedTranslations = await localforage.getItem(cacheKey)
         if (cachedTranslations) {
           i18n.addResourceBundle(lng, ns, cachedTranslations)
         } else {
-          const translations = await import(`../locales/${lng}/${ns}.json`)
+          const translations = await import(`./locales/${lng}/${ns}.json`)
           i18n.addResourceBundle(lng, ns, translations.default)
           await localforage.setItem(cacheKey, translations.default)
         }
