@@ -10,13 +10,13 @@ interface AvatarsProps {
   color?: AvatarsColor
   imageUrl?: string
   size?: AvatarsSize
-  weight?: number
-  stroke?: boolean
+  borderWidth?: number
+  border?: boolean
 }
 
-export const Avatars = memo(({ className, color, imageUrl, size, weight, stroke }: AvatarsProps) => {
+export const Avatars = memo(({ className, color, imageUrl, size, borderWidth, border }: AvatarsProps) => {
   const style: CSSProperties = {
-    border: stroke ? `${weight}px solid var(--${color})` : '',
+    border: border ? `${borderWidth ?? 3}px solid var(--${color})` : '',
   }
 
   const allStyles = classNames(
@@ -27,8 +27,7 @@ export const Avatars = memo(({ className, color, imageUrl, size, weight, stroke 
     },
     className,
   )
-  const image = imageUrl && <img alt='Avatars' className={allStyles} src={imageUrl} style={style} />
 
-  return image
+  return <>{imageUrl && <img alt='Avatars' className={allStyles} src={imageUrl} style={style} />}</>
 })
 Avatars.displayName = 'Avatars'
