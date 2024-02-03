@@ -17,4 +17,5 @@ Normal.args = {
     'https://img-forum-wt-ru.cdn.gaijin.net/original/3X/a/f/af62d76a2d92797df0711e6a94d319490936f3a1.jpeg',
   size: 'small',
   weight: 1,
+  stroke: true,
 }
