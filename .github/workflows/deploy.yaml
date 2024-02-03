@@ -1,0 +1,15 @@
+name: Deploy Application
+on: workflow_dispatch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SSH
+        uses: D3rHase/ssh-command-action@v0.2.2
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          user: ${{ secrets.SSH_USERNAME }}
+          private_key: ${{ secrets.SSH_PRIVATE }}
+          host_fingerprint: ${{ secrets.SSH_KNOWN_HOST}}
+          command: rsync -avz ./dist/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/chill_build
