@@ -1,0 +1,14 @@
+.component {
+  border-radius: var(--circle);
+}
+
+.sizeSmall {
+  width: var(--gap-xxxl);
+  height: var(--gap-xxxl);
+}
+
+.sizeBig {
+  width: calc(var(--gap-xxxl) * 2);
+  height: calc(var(--gap-xxxl) * 2);
+  padding: 3px;
+}
