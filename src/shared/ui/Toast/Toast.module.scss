@@ -1,0 +1,25 @@
+.component {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--gap-base);
+  justify-content: space-between;
+  border-radius: calc(var(--gap-lg) / 3);
+  cursor: pointer;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-main);
+}
+
+.sizeNormal {
+  width: calc(var(--gap-xxxl) * 9.5);
+  height: var(--gap-xxxl);
+}
+.iconClose {
+  transition: .3s ease-in;
+  &:hover {
+    color: var(--clr-card-heading);
+  }
+}

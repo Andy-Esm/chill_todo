@@ -1,6 +1,8 @@
 import { ResponseTask, TaskType } from '@entities/Tasks'
 import { useDeleteTaskMutation, useUpdateTaskStatusMutation } from '@shared/api'
 import { IconButton } from '@shared/ui/IconButton'
+import { Toast } from '@shared/ui/Toast'
+import { Zoom, toast } from 'react-toastify'
 import styles from './TaskCardActions.module.scss'
 
 interface TaskCardActionsProps {
@@ -15,6 +17,20 @@ export const TaskCardActions = ({ task }: TaskCardActionsProps) => {
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation()
     deleteTask(task.id)
+    toast(
+      <Toast
+        autoClose={1000}
+        background
+        colorBg='accent-danger'
+        colorFont='neutral'
+        iconName={{ check: 'icon-check', close: 'icon-close' }}
+        message='Задача удалена!'
+        size='normal'
+      />,
+      {
+        transition: Zoom,
+      },
+    )
   }
 
   const handleSubmit = (e: React.MouseEvent) => {

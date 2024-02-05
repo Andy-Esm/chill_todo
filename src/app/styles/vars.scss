@@ -20,8 +20,10 @@
   --lt-900: 22%;
 
   /* Colors */
-  --accent-danger: #FF4751;
+  --accent-danger: #FF0A16;
   --accent-success: #5BCB3E;
+  --nav: #7A2CDD;
+  --neutral: #FAFAFA;
 
   /* Accent colors */
   --clr-accent-grey: hsl(var(--neutral-grey-hs) var(--lt-500));
@@ -68,6 +70,7 @@
   --gap-xs: 4px;
   --gap-sm: 8px;
   --gap-md: 12px;
+  --gap-base: 14px;
   --gap-main: 16px;
   --gap-lg: 18px;
   --gap-xl: 22px;

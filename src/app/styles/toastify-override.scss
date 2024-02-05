@@ -1,0 +1,27 @@
+:root {
+  --toastify-toast-width: auto;
+}
+
+.Toastify__toast {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.Toastify__toast-body {
+  background-color: transparent !important;
+}
+
+.Toastify__progress-bar {
+  display: none !important;
+}
+
+.Toastify__progress-bar--bg {
+  display: none !important;
+}
+
+.Toastify__close-button {
+  display: none !important;
+}
+.Toastify__progress-bar--wrp {
+  display: none !important;
+}

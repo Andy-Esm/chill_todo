@@ -11,9 +11,11 @@ import { IconButton } from '@shared/ui/IconButton'
 import { Popover } from '@shared/ui/Popover'
 import { TextArea } from '@shared/ui/TextArea'
 import { Title } from '@shared/ui/Title'
+import { Toast } from '@shared/ui/Toast'
 import moment from 'moment'
 import { memo, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { Zoom, toast } from 'react-toastify'
 import { useSubtasks } from '../../hooks/useSubtasks/useSubtasks'
 import { useTags } from '../../hooks/useTags/useTags'
 import { EditTaskSchema } from '../../model/EditTaskSchema'
@@ -85,6 +87,20 @@ export const EditTaskForm = memo(({ task }: EditTaskFormProps) => {
           task: taskRequest,
         })
       : await createTaskItem({ subtasks: subTasks, task: taskRequest })
+    toast(
+      <Toast
+        autoClose={1000}
+        background
+        colorBg='accent-success'
+        colorFont='neutral'
+        iconName={{ check: 'icon-check', close: 'icon-close' }}
+        message='Задача добавлена!'
+        size='normal'
+      />,
+      {
+        transition: Zoom,
+      },
+    )
     closeEditTaskForm()
   }
 
