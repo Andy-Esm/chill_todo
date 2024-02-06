@@ -1,8 +1,15 @@
 .component {
+  --size: 30px;
+
   border-radius: var(--circle);
 }
 
 .sizeSmall {
+  width: var(--size);
+  height: var(--size);
+}
+
+.sizeMedium {
   width: var(--gap-xxxl);
   height: var(--gap-xxxl);
 }

@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import { CSSProperties, memo } from 'react'
 import styles from './Avatars.module.scss'
 
-type AvatarsSize = 'big' | 'small'
+type AvatarsSize = 'big' | 'medium' | 'small'
 type AvatarsColor = 'accent-danger' | 'accent-success'
 
 interface AvatarsProps {
@@ -24,6 +24,7 @@ export const Avatars = memo(
       styles.component,
       {
         [styles.sizeBig]: size === 'big',
+        [styles.sizeMedium]: size === 'medium',
         [styles.sizeSmall]: size === 'small',
       },
       className,
