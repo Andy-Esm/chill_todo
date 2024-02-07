@@ -1,1 +1,6 @@
-export { ProjectsMenuList } from './ui/ProjectsMenuList/ProjectsMenuList'
+export { setProjectsFilter } from './model/slices/projectSlice'
+export { AddProjectCard } from './ui/AddProjectCard'
+export { ProjectCard } from './ui/ProjectCard'
+export { ProjectCardsList } from './ui/ProjectCardsList'
+export { ProjectsMenuList } from './ui/ProjectsMenuList'
+export * from './model/types/Project'

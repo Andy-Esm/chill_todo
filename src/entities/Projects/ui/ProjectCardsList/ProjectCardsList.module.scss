@@ -1,0 +1,11 @@
+:root {
+  --columns: 200px;
+
+}
+
+.project-wrapper{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, var(--columns));
+    gap: var(--fs-xl);
+    padding-block-start: var(--gap-xxxl);
+  }
