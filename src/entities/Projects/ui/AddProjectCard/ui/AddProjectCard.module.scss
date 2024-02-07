@@ -1,0 +1,29 @@
+:root {
+  --height: 220px;
+  --padding: 10px;
+  --radius: 50%;
+}
+
+.add-project-card {
+  align-items: center;
+  justify-content: center;
+  height: var(--height);
+  box-shadow: var(--shadow-inner-main);
+}
+
+.add-icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--gap-sm) * 6);
+  height: calc(var(--gap-sm) * 6);
+  padding: var(--padding);
+  background-color: var(--clr-nav-main-secondary);
+  border: 1px solid var(--clr-nav-main-secondary);
+  border-radius: var(--radius);
+  fill: var(--clr-accent-white);
+}
+
+.add-icon {
+  font-size: calc(var(--gap-xs) * 7);
+}
