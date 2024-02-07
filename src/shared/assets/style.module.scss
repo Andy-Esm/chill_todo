@@ -3,18 +3,19 @@
   font-weight: normal;
   font-style: normal;
   font-display: block;
-  src:  url('fonts/chillTodo.eot?fkymrx');
-  src:  url('fonts/chillTodo.eot?fkymrx#iefix') format('embedded-opentype'),
-    url('fonts/chillTodo.ttf?fkymrx') format('truetype'),
-    url('fonts/chillTodo.woff?fkymrx') format('woff'),
-    url('fonts/chillTodo.svg?fkymrx#chillTodo') format('svg');
+  src: url('fonts/chillTodo.eot?25pdzk');
+  src:
+    url('fonts/chillTodo.eot?25pdzk#iefix') format('embedded-opentype'),
+    url('fonts/chillTodo.ttf?25pdzk') format('truetype'),
+    url('fonts/chillTodo.woff?25pdzk') format('woff'),
+    url('fonts/chillTodo.svg?25pdzk#chillTodo') format('svg');
 }
 
 i {
   speak: never;
 
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: chillTodo, sans-serif !important;
+  font-family: chillTodo !important;
   font-weight: normal;
   font-style: normal;
   font-variant: normal;
@@ -26,66 +27,78 @@ i {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-achtung-octagon::before {
+  content: '\e911';
+}
+
+.icon-achtung-triangle::before {
+  content: '\e912';
+}
+
+.icon-close-thin::before {
+  content: '\e90f';
+}
+
 .icon-arrow-left::before {
-  content: "\e910";
+  content: '\e910';
 }
 
 .icon-list::before {
-  content: "\e900";
+  content: '\e900';
 }
 
 .icon-stopwatch::before {
-  content: "\e90e";
+  content: '\e90e';
 }
 
 .icon-calendar::before {
-  content: "\e901";
+  content: '\e901';
 }
 
-.icon-check::before {
-  content: "\e902";
+.icon-check1::before {
+  content: '\e902';
 }
 
 .icon-close::before {
-  content: "\e903";
+  content: '\e903';
 }
 
 .icon-folder::before {
-  content: "\e904";
+  content: '\e904';
 }
 
 .icon-home::before {
-  content: "\e905";
+  content: '\e905';
 }
 
 .icon-notification::before {
-  content: "\e906";
+  content: '\e906';
 }
 
 .icon-plus::before {
-  content: "\e907";
+  content: '\e907';
 }
 
 .icon-plus-rectangle::before {
-  content: "\e908";
+  content: '\e908';
 }
 
 .icon-search::before {
-  content: "\e909";
+  content: '\e909';
 }
 
 .icon-settings::before {
-  content: "\e90a";
+  content: '\e90a';
 }
 
 .icon-tasks::before {
-  content: "\e90b";
+  content: '\e90b';
 }
 
 .icon-team::before {
-  content: "\e90c";
+  content: '\e90c';
 }
 
 .icon-trash::before {
-  content: "\e90d";
+  content: '\e90d';
 }
