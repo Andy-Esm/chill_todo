@@ -20,8 +20,13 @@
   --lt-900: 22%;
 
   /* Colors */
-  --accent-danger: #FF4751;
+  --bg: #F9F5FF;
+  --accent-danger: #FF0A16;
   --accent-success: #5BCB3E;
+  --nav: #7A2CDD;
+  --neutral: #FAFAFA;
+  --grey: #C7C7C7;
+
 
   /* Accent colors */
   --clr-accent-grey: hsl(var(--neutral-grey-hs) var(--lt-500));
@@ -37,8 +42,13 @@
 
   /* Text colors */
   --clr-card-heading: #1C1D22;
-  --clr-nav-main: hsl(var(--navigation-hs) var(--lt-500));
+  --clr-nav-main-hs: #B389FB;
+  --clr-nav-main: var(--clr-nav-main-hs, hsl(var(--navigation-hs) var(--lt-500)));
+  --clr-nav-main-secondary: hsl(var(--navigation-hs) var(--lt-500));
   --clr-nav-secondary: var(--clr-accent-grey);
+  --clr-title-card-secondary: #3D3D57;
+  --clr-card-content-secondary: #9393B4;
+  --crl-avatar-content: #575757;
 
 
   /* font-family */
@@ -60,7 +70,9 @@
 
   /* Shadows */
   --shadow-box-main: 0px 4px 12px 1px rgb(34 139 207 / 25%);
-  --shadow-inner-main:  inset -4px -4px 4px rgb(34 139 207 / 14%), inset 4px 4px 4px rgb(34 139 207 / 15%);
+  --shadow-inner-main: inset 4px 4px 4px 0 rgb(105 93 251 / 15%), inset -4px -4px 4px 0 rgb(105 93 251 / 14%);
+
+  // --shadow-inner-main:  inset -4px -4px 4px rgb(34 139 207 / 14%), inset 4px 4px 4px rgb(34 139 207 / 15%);
   --shadow-sidebar:  0px 4px 12px 1px rgb(108 73 172 / 25%);
   --shadow-hover: 0 4px 12px 2px rgb(34 139 207 / 40%);
 
@@ -68,6 +80,7 @@
   --gap-xs: 4px;
   --gap-sm: 8px;
   --gap-md: 12px;
+  --gap-base: 14px;
   --gap-main: 16px;
   --gap-lg: 18px;
   --gap-xl: 22px;
