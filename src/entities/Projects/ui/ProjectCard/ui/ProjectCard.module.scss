@@ -1,6 +1,6 @@
 :root {
   --height: 220px;
-  --size: 2px;
+  --size-dot: 2px;
   --avatar-size: 30px;
   --width: 155px;
   --margin-bottom: 15px;
@@ -31,9 +31,9 @@
 
 .dot {
   transform: rotate(var(--rotate));
-  width: var(--size);
-  height: var(--size);
-  margin: var(--size);
+  width: var(--size-dot);
+  height: var(--size-dot);
+  margin: var(--size-dot);
   writing-mode: vertical-rl;
   text-orientation: upright;
   background-color: var(--clr-card-content-secondary);
