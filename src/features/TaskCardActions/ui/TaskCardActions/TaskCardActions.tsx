@@ -19,11 +19,10 @@ export const TaskCardActions = ({ task }: TaskCardActionsProps) => {
     deleteTask(task.id)
     toast(
       <Toast
-        autoClose={1000}
         background
         colorBg='accent-danger'
         colorFont='neutral'
-        iconName={{ check: 'icon-check', close: 'icon-close' }}
+        iconName={{ check: 'icon-achtung-triangle', close: 'icon-close-thin' }}
         message='Задача удалена!'
         size='normal'
       />,

@@ -6,15 +6,13 @@ import styles from './Toast.module.scss'
 import 'react-toastify/dist/ReactToastify.css'
 
 type ToastSize = 'normal'
-type ToastBgStyle = 'accent-danger' | 'accent-success' | 'nav' | 'neutral'
-type ToastBorderStyle = 'accent-danger' | 'accent-success' | 'nav' | 'neutral'
+type ToastBgStyle = 'accent-danger' | 'accent-success' | 'nav'
 type ToastIcon = { check: IconName; close: IconName }
-type ToastFontStyle = 'accent-danger' | 'accent-success' | 'nav' | 'neutral'
+type ToastFontStyle = 'neutral'
 
 interface ToastStyle {
   background?: boolean
   border?: boolean
-  borderColor?: ToastBorderStyle
   borderWidth?: number
   colorBg?: ToastBgStyle
   colorFont?: ToastFontStyle
@@ -34,10 +32,9 @@ interface ToastBehavior {
 interface ToastProps extends ToastStyle, ToastContent, ToastBehavior {}
 
 export const Toast = ({
-  autoClose,
+  autoClose = 3000,
   background,
   border,
-  borderColor,
   borderWidth,
   colorBg,
   colorFont,
@@ -47,11 +44,11 @@ export const Toast = ({
 }: ToastProps) => {
   const style: CSSProperties = {
     backgroundColor: background ? `var(--${colorBg})` : '',
-    border: border ? `${borderWidth ?? 2}px solid var(--${borderColor})` : '',
+    border: border && !background ? `${borderWidth ?? 2}px solid var(--nav)` : '',
     color: colorFont ? `var(--${colorFont})` : '',
   }
   const allStyles = classNames(styles.component, {
-    [styles.sizeNormal]: size === 'normal',
+    [styles.sizenormal]: size === 'normal',
   })
   const closeToast = () => {
     toast.dismiss()
@@ -66,15 +63,18 @@ export const Toast = ({
     return () => {
       clearTimeout(timeout)
     }
-  }, [])
+  }, [autoClose])
 
   return (
     <div className={allStyles} style={style}>
-      <div className={styles.content}>
+      <div className={classNames(styles.content, { [styles.colorfont]: border && !background })}>
         {iconName?.check && <IconFont iconName={iconName.check} />}
         {message}
       </div>
-      <div className={styles.iconClose} onClick={closeOnClick}>
+      <div
+        className={classNames(styles.iconclose, { [styles.colorfont]: border && !background })}
+        onClick={closeOnClick}
+      >
         {iconName?.close && <IconFont iconName={iconName.close} />}
       </div>
     </div>

@@ -1,25 +1,31 @@
 .component {
+  cursor: pointer;
   display: flex;
   align-items: center;
-  padding: 0 var(--gap-base);
   justify-content: space-between;
+  padding: 0 var(--gap-base);
   border-radius: calc(var(--gap-lg) / 3);
-  cursor: pointer;
 }
 
 .content {
   display: flex;
-  align-items: center;
   gap: var(--gap-main);
+  align-items: center;
 }
 
-.sizeNormal {
+.sizenormal {
   width: calc(var(--gap-xxxl) * 9.5);
   height: var(--gap-xxxl);
 }
-.iconClose {
+
+.iconclose {
   transition: .3s ease-in;
+
   &:hover {
     color: var(--clr-card-heading);
   }
+}
+
+.colorfont {
+  color: var(--nav);
 }

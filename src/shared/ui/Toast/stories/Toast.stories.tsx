@@ -14,7 +14,7 @@ Normal.args = {
   background: true,
   colorBg: 'accent-success',
   colorFont: 'neutral',
-  iconName: { check: 'icon-check', close: 'icon-close' },
+  iconName: { check: 'icon-achtung-triangle', close: 'icon-close-thin' },
   message: 'Задача выполнена',
   size: 'normal',
 }

@@ -80,21 +80,25 @@ export const EditTaskForm = memo(({ task }: EditTaskFormProps) => {
       type: TaskType.CURRENT,
     }
     const subTasksRequest = subTasks.map((task) => ({ ...task, deadlineDate: moment(finishDate) }))
-    task.id
-      ? await updateTask({
-          removedSubtasks: removedSubTasks,
-          subtasks: subTasksRequest,
-          task: taskRequest,
-        })
-      : await createTaskItem({ subtasks: subTasks, task: taskRequest })
+    let message = ''
+    if (task.id) {
+      await updateTask({
+        removedSubtasks: removedSubTasks,
+        subtasks: subTasksRequest,
+        task: taskRequest,
+      })
+      message = 'Задача обновлена!'
+    } else {
+      await createTaskItem({ subtasks: subTasks, task: taskRequest })
+      message = 'Задача создана!'
+    }
     toast(
       <Toast
-        autoClose={1000}
         background
         colorBg='accent-success'
         colorFont='neutral'
-        iconName={{ check: 'icon-check', close: 'icon-close' }}
-        message='Задача добавлена!'
+        iconName={{ check: 'icon-check', close: 'icon-close-thin' }}
+        message={message}
         size='normal'
       />,
       {
