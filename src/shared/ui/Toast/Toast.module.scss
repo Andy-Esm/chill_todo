@@ -1,0 +1,31 @@
+.component {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--gap-base);
+  border-radius: calc(var(--gap-lg) / 3);
+}
+
+.content {
+  display: flex;
+  gap: var(--gap-main);
+  align-items: center;
+}
+
+.sizenormal {
+  width: calc(var(--gap-xxxl) * 9.5);
+  height: var(--gap-xxxl);
+}
+
+.iconclose {
+  transition: .3s ease-in;
+
+  &:hover {
+    color: var(--clr-card-heading);
+  }
+}
+
+.colorfont {
+  color: var(--nav);
+}

@@ -107,6 +107,7 @@
     "react-hook-form": "^7.45.1",
     "react-i18next": "^14.0.1",
     "react-popper": "^2.3.0",
+    "react-toastify": "^10.0.4",
     "react-virtualized-auto-sizer": "^1.0.20",
     "react-window": "^1.8.9",
     "storybook": "^7.0.26",

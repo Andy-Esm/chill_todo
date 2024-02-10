@@ -11,9 +11,11 @@ import { IconButton } from '@shared/ui/IconButton'
 import { Popover } from '@shared/ui/Popover'
 import { TextArea } from '@shared/ui/TextArea'
 import { Title } from '@shared/ui/Title'
+import { Toast } from '@shared/ui/Toast'
 import moment from 'moment'
 import { memo, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { Zoom, toast } from 'react-toastify'
 import { useSubtasks } from '../../hooks/useSubtasks/useSubtasks'
 import { useTags } from '../../hooks/useTags/useTags'
 import { EditTaskSchema } from '../../model/EditTaskSchema'
@@ -78,13 +80,31 @@ export const EditTaskForm = memo(({ task }: EditTaskFormProps) => {
       type: TaskType.CURRENT,
     }
     const subTasksRequest = subTasks.map((task) => ({ ...task, deadlineDate: moment(finishDate) }))
-    task.id
-      ? await updateTask({
-          removedSubtasks: removedSubTasks,
-          subtasks: subTasksRequest,
-          task: taskRequest,
-        })
-      : await createTaskItem({ subtasks: subTasks, task: taskRequest })
+    let message = ''
+    if (task.id) {
+      await updateTask({
+        removedSubtasks: removedSubTasks,
+        subtasks: subTasksRequest,
+        task: taskRequest,
+      })
+      message = 'Задача обновлена!'
+    } else {
+      await createTaskItem({ subtasks: subTasks, task: taskRequest })
+      message = 'Задача создана!'
+    }
+    toast(
+      <Toast
+        background
+        colorBg='accent-success'
+        colorFont='neutral'
+        iconName={{ check: 'icon-check', close: 'icon-close-thin' }}
+        message={message}
+        size='normal'
+      />,
+      {
+        transition: Zoom,
+      },
+    )
     closeEditTaskForm()
   }
 
